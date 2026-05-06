@@ -1,36 +1,71 @@
-"use client";
-
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function ClenovePage() {
-  const members = [
-    { name: "Jan Novák", age: 34, group: "Muži" },
-    { name: "Petr Svoboda", age: 41, group: "Muži" },
-    { name: "Tomáš Dvořák", age: 29, group: "Muži" },
-    { name: "Michal Procházka", age: 37, group: "Muži" },
+type Member = {
+  id: string;
+  name: string;
+  role: string;
+  group: string;
+  section: string;
+};
 
-    { name: "Jana Novotná", age: 32, group: "Ženy" },
-    { name: "Petra Králová", age: 28, group: "Ženy" },
+export default async function ClenovePage() {
+  const { data: members } = await supabase
+    .from("members")
+    .select("*")
+    .eq("section", "SDH");
 
-    { name: "David Konečný", age: 16, group: "Mládež" },
-    { name: "Vojtěch Malý", age: 14, group: "Mládež" },
+  const muzi =
+    members?.filter((member: Member) => member.group === "Muži") || [];
+
+  const zeny =
+    members?.filter((member: Member) => member.group === "Ženy") || [];
+
+  const mladez =
+    members?.filter((member: Member) => member.group === "Mládež") || [];
+
+  const groups = [
+    { title: "Muži", data: muzi },
+    { title: "Ženy", data: zeny },
+    { title: "Mládež", data: mladez },
   ];
 
-  const groups = ["Muži", "Ženy", "Mládež"];
-
   return (
-    <main className="min-h-screen bg-stone-100">
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <div className="mb-10">
-          <Link
-            href="/sdh"
-            className="text-sm font-medium text-neutral-600 hover:text-red-700"
-          >
-            ← Zpět na SDH
-          </Link>
-        </div>
+    <main className="min-h-screen bg-white px-6 py-14">
+      {/* 🔥 HOVER STYLE */}
+      <style>
+        {`
+          .member-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            transition: all 180ms ease;
+          }
 
-        <div className="mb-12">
+          .member-row:hover {
+            background: #f9fafb;
+            border-color: #e5e7eb;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+          }
+        `}
+      </style>
+
+      <section className="mx-auto max-w-5xl">
+        {/* 🔙 ZPĚT */}
+        <Link
+          href="/sdh"
+          className="mt-8 block text-sm text-neutral-500 transition hover:text-red-700"
+        >
+          ← Zpět na SDH
+        </Link>
+
+        {/* 🔥 NADPIS */}
+        <div className="mt-6 mb-12">
           <div className="flex items-baseline gap-4">
             <h1 className="text-4xl font-bold text-neutral-950">
               Členové
@@ -41,63 +76,51 @@ export default function ClenovePage() {
             </span>
           </div>
 
-          <p className="mt-6 text-lg text-neutral-600">
-            Přehled členů sboru dobrovolných hasičů Dukovany.
+          <p className="mt-4 text-neutral-600">
+            Přehled členů sboru dobrovolných hasičů.
           </p>
         </div>
 
-        <div className="space-y-12">
-          {groups.map((group) => {
-            const groupMembers = members.filter(
-              (member) => member.group === group
-            );
+        {/* 🔥 SEZNAM */}
+        <div className="space-y-8">
+          {groups.map((group) => (
+            <section
+              key={group.title}
+              className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm"
+            >
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-red-700">
+                  {group.title}
+                </h2>
 
-            return (
-              <section
-                key={group}
-                className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm"
-              >
-                <div className="mb-6 flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-red-700">
-                    {group}
-                  </h2>
+                <span className="font-bold text-red-700">
+                  {group.data.length}
+                </span>
+              </div>
 
-                  <span className="rounded-full bg-red-50 px-3 py-1 text-sm font-bold text-red-700">
-                    {groupMembers.length}
-                  </span>
-                </div>
+              <div className="space-y-2">
+                {group.data.map((member: Member) => (
+                  <div key={member.id} className="member-row">
+                    <span className="font-semibold text-neutral-950">
+                      {member.name}
+                    </span>
 
-                <div className="divide-y divide-neutral-200">
-                  {groupMembers.map((member) => (
-                    <div
-                      key={member.name}
-                      className="
-                        flex items-center justify-between px-3 py-4
-                        odd:bg-white even:bg-stone-100
-                        cursor-pointer
-                        transition-all duration-200 ease-out
-                        hover:!bg-stone-200 hover:-translate-y-1 hover:shadow-md
-                      "
-                    >
-                      <p className="font-semibold text-neutral-900">
-                        {member.name}
-                      </p>
+                    <span className="text-sm text-neutral-600">
+                      {member.role}
+                    </span>
+                  </div>
+                ))}
 
-                      {group !== "Mládež" && (
-                        <span className="text-sm text-neutral-600">
-                          {member.age} let
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
+                {group.data.length === 0 && (
+                  <p className="px-4 py-3 text-sm text-neutral-400">
+                    Zatím zde nejsou žádní členové.
+                  </p>
+                )}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
     </main>
   );
 }
-
-
