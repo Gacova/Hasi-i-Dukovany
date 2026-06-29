@@ -2,87 +2,48 @@ import BackLink from "@/components/BackLink";
 
 export default function VyborPage() {
   const committeeMembers = [
-    {
-      name: "Marcela Vrbková",
-      role: "Starostka SDH",
-      email: "mail",
-      image: "/20260531_103645.jpg",
-    },
-    {
-      name: "Jan Vrbka",
-      role: "1. náměstek starostky",
-      email: "mail",
-      image: "/20260531_103736.jpg",
-    },
-    {
-      name: "Bc. Pavel Stuchlík, DiS.",
-      role: "Velitel JPO",
-      email: "mail",
-      image: "/pavel.jpg",
-    },
-    {
-      name: "Ing. Lukáš Seidl",
-      role: "Hospodář",
-      email: "mail",
-    },
-    {
-      name: "Kristýna Gacova",
-      role: "Vedoucí mládeže",
-      email: "gacova@centrum.cz",
-      image: "/gacova.jpg",
-    },
-    {
-      name: "Vladimír Troščák",
-      role: "Člen výboru",
-      email: "mail",
-      image: "/IMG-20260531-WA0010.jpg",
-    },
-    {
-      name: "Tomáš Vorel",
-      role: "Člen výboru",
-      email: "mail",
-      image: "/20260531_171357.jpg",
-    },
+    { name: "Marcela Vrbková", role: "Starostka SDH", email: "mail", image: "/20260531_103645.jpg" },
+    { name: "Jan Vrbka", role: "1. náměstek starostky", email: "mail", image: "/20260531_103736.jpg" },
+    { name: "Bc. Pavel Stuchlík, DiS.", role: "Velitel JPO", email: "mail", image: "/pavel.jpg" },
+    { name: "Ing. Lukáš Seidl", role: "Hospodář", email: "mail" },
+    { name: "Kristýna Gacova", role: "Vedoucí mládeže", email: "gacova@centrum.cz", image: "/gacova.jpg" },
+    { name: "Vladimír Troščák", role: "Člen výboru", email: "mail", image: "/IMG-20260531-WA0010.jpg" },
+    { name: "Tomáš Vorel", role: "Člen výboru", email: "mail", image: "/20260531_171357.jpg" },
   ];
 
   return (
-    <main
-      style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <div
         style={{
-          flex: 1,
           maxWidth: "1400px",
           width: "100%",
           margin: "0 auto",
-          padding: "40px 32px 80px",
+          padding: "34px 24px 70px",
         }}
       >
         <BackLink href="/sdh">Zpět na SDH</BackLink>
 
         <h1
           style={{
-            marginTop: "30px",
-            marginBottom: "20px",
-            fontSize: "64px",
+            marginTop: "28px",
+            marginBottom: "18px",
+            fontSize: "clamp(42px, 9vw, 64px)",
+            lineHeight: 1.05,
             fontWeight: 800,
+            letterSpacing: "-1.5px",
           }}
         >
-          Výbor{" "}
-          <span style={{ color: "#dc2626" }}>SDH</span>{" "}
+          Výbor <span style={{ color: "#dc2626" }}>SDH</span>{" "}
           <span style={{ color: "#111827" }}>Dukovany</span>
         </h1>
 
         <p
           style={{
-            marginBottom: "50px",
-            fontSize: "20px",
+            marginBottom: "38px",
+            fontSize: "clamp(17px, 4vw, 20px)",
+            lineHeight: 1.6,
             color: "#6b7280",
+            maxWidth: "620px",
           }}
         >
           Přehled členů výboru SDH a jejich funkcí.
@@ -91,7 +52,7 @@ export default function VyborPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: "22px",
           }}
         >
@@ -101,7 +62,7 @@ export default function VyborPage() {
               style={{
                 background: "#ffffff",
                 border: "1px solid #ececec",
-                borderRadius: "28px",
+                borderRadius: "26px",
                 overflow: "hidden",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
               }}
@@ -109,7 +70,7 @@ export default function VyborPage() {
               <div
                 style={{
                   width: "100%",
-                  height: "360px",
+                  height: "clamp(280px, 70vw, 360px)",
                   background: "#f3f4f6",
                   display: "flex",
                   alignItems: "center",
@@ -129,23 +90,13 @@ export default function VyborPage() {
                     }}
                   />
                 ) : (
-                  <div
-                    style={{
-                      color: "#9ca3af",
-                      fontSize: "16px",
-                    }}
-                  >
+                  <div style={{ color: "#9ca3af", fontSize: "16px" }}>
                     Fotka člena
                   </div>
                 )}
               </div>
 
-              <div
-                style={{
-                  padding: "22px",
-                  textAlign: "center",
-                }}
-              >
+              <div style={{ padding: "22px", textAlign: "center" }}>
                 <h2
                   style={{
                     margin: 0,
@@ -158,13 +109,7 @@ export default function VyborPage() {
                   {member.name}
                 </h2>
 
-                <p
-                  style={{
-                    marginTop: "10px",
-                    fontSize: "16px",
-                    color: "#6b7280",
-                  }}
-                >
+                <p style={{ marginTop: "10px", fontSize: "16px", color: "#6b7280" }}>
                   {member.role}
                 </p>
 

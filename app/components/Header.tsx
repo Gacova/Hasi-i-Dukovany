@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const sdhMenu = [
   { label: "Domů", href: "/sdh" },
@@ -26,27 +27,30 @@ const jpoMenu = [
 
 export default function Header() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const isSdh = pathname.startsWith("/sdh");
-  const isJpo = pathname.startsWith("/jpo");
-
-  const menu = isSdh ? sdhMenu : isJpo ? jpoMenu : sdhMenu;
+  const menu = pathname.startsWith("/jpo") ? jpoMenu : sdhMenu;
 
   return (
-    <header className="border-b border-neutral-200 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
-        <Link href="/" className="text-xl font-bold text-neutral-900">
+    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+        <Link
+  href="/"
+  className="text-2xl font-bold tracking-tight text-neutral-900 md:text-green-600"
+>
           <span className="text-red-700">Hasiči</span> Dukovany
         </Link>
 
-        <nav className="flex gap-6 text-sm font-medium text-neutral-700">
+        {/* Desktop */}
+        <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
           {menu.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`transition hover:text-red-700 ${
-                pathname === item.href ? "text-red-700" : ""
+              className={`transition ${
+                pathname === item.href
+                  ? "text-red-700"
+                  : "text-neutral-700 hover:text-red-700"
               }`}
             >
               {item.label}
@@ -54,7 +58,37 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* Mobil */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-2xl shadow-sm transition hover:bg-neutral-100 md:hidden"
+        >
+          {isOpen ? "✕" : "☰"}
+        </button>
       </div>
+
+      {isOpen && (
+        <div className="border-t border-neutral-200 bg-white md:hidden">
+          <div className="mx-auto max-w-sm p-5">
+            <div className="grid grid-cols-2 gap-3">
+              {menu.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`rounded-2xl px-4 py-4 text-center text-sm font-semibold shadow-sm transition ${
+                    pathname === item.href
+                      ? "bg-red-700 text-white"
+                      : "border border-neutral-200 bg-white hover:bg-neutral-100"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
