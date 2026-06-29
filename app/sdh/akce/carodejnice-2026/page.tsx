@@ -179,33 +179,6 @@ export default function Carodejnice2026Page() {
             </a>
           </section>
         </section>
-
-        <section style={{
-          marginTop: "36px",
-          borderTop: "1px solid #e5e7eb",
-          paddingTop: "26px",
-        }}>
-          <h2 style={{ margin: "0 0 18px", fontSize: "34px", fontWeight: 800 }}>
-            Video z akce
-          </h2>
-
-          <div style={{
-            width: "520px",
-            maxWidth: "100%",
-            margin: "0 auto",
-            borderRadius: "24px",
-            overflow: "hidden",
-            boxShadow: "0 16px 36px rgba(0,0,0,0.16)",
-          }}>
-            <video
-              src="/carodejnice-2026.mp4"
-              controls
-              poster="/carodejnice.jpg"
-              preload="metadata"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </div>
-        </section>
       </div>
     </main>
   );
