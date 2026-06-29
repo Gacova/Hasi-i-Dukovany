@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function SDHPage() {
   const tiles = [
     { title: "Výbor", text: "Přehled členů výboru SDH a jejich funkcí.", href: "/sdh/vybor" },
@@ -28,10 +30,10 @@ export default function SDHPage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "36px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "40px",
             alignItems: "center",
-            marginBottom: "44px",
+            marginBottom: "48px",
           }}
         >
           <div>
@@ -74,7 +76,7 @@ export default function SDHPage() {
                 justifyContent: "center",
                 marginTop: "30px",
                 background: "#b91c1c",
-                color: "white",
+                color: "#ffffff",
                 padding: "16px 38px",
                 borderRadius: "999px",
                 textDecoration: "none",
@@ -87,49 +89,64 @@ export default function SDHPage() {
             </a>
           </div>
 
-          <img
-            src="/sdh.jpg"
-            alt="SDH Dukovany"
-            style={{
-              width: "100%",
-              height: "min(430px, 65vw)",
-              minHeight: "240px",
-              objectFit: "cover",
-              borderRadius: "28px",
-              display: "block",
-              boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
-            }}
-          />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Image
+              src="/sdh.jpg"
+              alt="SDH Dukovany"
+              width={700}
+              height={525}
+              priority
+              style={{
+                width: "100%",
+                maxWidth: "700px",
+                height: "auto",
+                borderRadius: "28px",
+                display: "block",
+                boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+              }}
+            />
+          </div>
         </section>
 
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "22px",
-          }}
-        >
+        <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {tiles.map((tile) => (
             <a key={tile.title} href={tile.href} style={{ textDecoration: "none", color: "inherit" }}>
               <article
                 style={{
-                  minHeight: "170px",
+                  minHeight: "185px",
                   background: "#ffffff",
                   border: "1px solid #e5e7eb",
                   borderRadius: "28px",
                   padding: "28px",
                   boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800 }}>
                   {tile.title}
                 </h2>
 
-                <p style={{ marginTop: "12px", marginBottom: "22px", fontSize: "17px", lineHeight: 1.55, color: "#4b5563" }}>
+                <p
+                  style={{
+                    marginTop: "12px",
+                    fontSize: "17px",
+                    lineHeight: 1.55,
+                    color: "#4b5563",
+                    flex: 1,
+                  }}
+                >
                   {tile.text}
                 </p>
 
-                <span style={{ color: "#b91c1c", fontSize: "17px", fontWeight: 800 }}>
+                <span
+                  style={{
+                    color: "#b91c1c",
+                    fontSize: "17px",
+                    fontWeight: 800,
+                    marginTop: "18px",
+                  }}
+                >
                   Otevřít sekci →
                 </span>
               </article>

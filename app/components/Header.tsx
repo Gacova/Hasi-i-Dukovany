@@ -36,10 +36,10 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <Link
   href="/"
-  className="text-2xl font-bold tracking-tight text-neutral-900 md:text-green-600"
+  className="text-2xl font-bold tracking-tight text-neutral-900"
 >
-          <span className="text-red-700">Hasiči</span> Dukovany
-        </Link>
+  <span className="text-red-700">Hasiči</span> Dukovany
+</Link>
 
         {/* Desktop */}
         <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">

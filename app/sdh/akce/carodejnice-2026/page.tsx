@@ -10,44 +10,57 @@ export default function Carodejnice2026Page() {
 
   return (
     <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "40px 32px 80px" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <BackLink href="/sdh/akce">Zpět na akce</BackLink>
 
         <section style={{
-          marginTop: "24px",
+          marginTop: "28px",
           border: "1px solid #ececec",
           borderRadius: "28px",
-          padding: "34px",
+          padding: "clamp(24px, 5vw, 34px)",
           boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "26px" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            gap: "20px",
+            alignItems: "center",
+          }}>
             <div style={{
-              width: "76px",
-              height: "76px",
+              width: "clamp(58px, 14vw, 76px)",
+              height: "clamp(58px, 14vw, 76px)",
               borderRadius: "999px",
               background: "#dc2626",
               color: "white",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "38px",
+              fontSize: "clamp(28px, 7vw, 38px)",
               flexShrink: 0,
             }}>
               🔥
             </div>
 
-            <div>
-              <h1 style={{ margin: 0, fontSize: "58px", fontWeight: 800, lineHeight: 1.05 }}>
+            <div style={{ minWidth: 0 }}>
+              <h1 style={{
+                margin: 0,
+                fontSize: "clamp(38px, 9vw, 58px)",
+                fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: "-1.5px",
+                overflowWrap: "break-word",
+              }}>
                 Pálení čarodějnic <span style={{ color: "#dc2626" }}>2026</span>
               </h1>
 
               <div style={{
                 display: "flex",
-                gap: "28px",
+                gap: "14px",
                 marginTop: "18px",
                 color: "#6b7280",
-                fontSize: "18px",
+                fontSize: "16px",
                 flexWrap: "wrap",
+                lineHeight: 1.5,
               }}>
                 <span>30. 4. 2026</span>
                 <span>17:00</span>
@@ -59,8 +72,8 @@ export default function Carodejnice2026Page() {
 
         <section style={{
           display: "grid",
-          gridTemplateColumns: "250px 1fr 1.25fr",
-          gap: "24px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "22px",
           marginTop: "28px",
           alignItems: "stretch",
         }}>
@@ -68,7 +81,7 @@ export default function Carodejnice2026Page() {
             background: "#fff7f7",
             border: "1px solid #ffe4e6",
             borderRadius: "28px",
-            padding: "34px 24px",
+            padding: "28px 24px",
             textAlign: "center",
           }}>
             <div style={{
@@ -90,12 +103,12 @@ export default function Carodejnice2026Page() {
               Společně pro naši obec a děti
             </h2>
 
-            <p style={{ marginTop: "24px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
+            <p style={{ marginTop: "22px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
               Sdružujeme síly, abychom mohli pořádat akce, které spojují lidi
               napříč generacemi a posilují komunitu.
             </p>
 
-            <p style={{ marginTop: "18px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
+            <p style={{ marginTop: "16px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
               Děkujeme všem, kteří s námi tvoří nezapomenutelné chvíle.
             </p>
           </aside>
@@ -114,14 +127,14 @@ export default function Carodejnice2026Page() {
             ].map(([icon, text], index) => (
               <div key={index} style={{
                 display: "flex",
-                gap: "18px",
-                padding: "24px",
+                gap: "16px",
+                padding: "22px",
                 alignItems: "center",
                 borderBottom: index === 3 ? "none" : "1px solid #f3f4f6",
               }}>
                 <div style={{
-                  width: "46px",
-                  height: "46px",
+                  width: "44px",
+                  height: "44px",
                   borderRadius: "999px",
                   background: "#fff1f2",
                   color: "#dc2626",
@@ -134,7 +147,7 @@ export default function Carodejnice2026Page() {
                   {icon}
                 </div>
 
-                <p style={{ margin: 0, fontSize: "17px", lineHeight: 1.6, color: "#1f2937" }}>
+                <p style={{ margin: 0, fontSize: "16px", lineHeight: 1.65, color: "#1f2937" }}>
                   {text}
                 </p>
               </div>
@@ -144,7 +157,7 @@ export default function Carodejnice2026Page() {
           <section>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
               gap: "14px",
             }}>
               {galleryImages.map((image, index) => (
@@ -154,7 +167,7 @@ export default function Carodejnice2026Page() {
                   alt={`Pálení čarodějnic ${index + 1}`}
                   style={{
                     width: "100%",
-                    height: "190px",
+                    height: "clamp(150px, 42vw, 190px)",
                     objectFit: "cover",
                     borderRadius: "22px",
                     display: "block",
@@ -169,7 +182,7 @@ export default function Carodejnice2026Page() {
                 display: "block",
                 marginTop: "18px",
                 color: "#dc2626",
-                fontSize: "18px",
+                fontSize: "17px",
                 fontWeight: 800,
                 textDecoration: "none",
                 textAlign: "right",

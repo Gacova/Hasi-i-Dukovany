@@ -49,13 +49,7 @@ export default function VyborPage() {
           Přehled členů výboru SDH a jejich funkcí.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "22px",
-          }}
-        >
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {committeeMembers.map((member) => (
             <div
               key={member.name}
