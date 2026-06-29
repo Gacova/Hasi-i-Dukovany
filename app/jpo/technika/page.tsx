@@ -49,7 +49,7 @@ export default function TechnikaPage() {
   return (
     <main
       style={{
-        background: "#f5f5f5",
+        background: "#ffffff",
         minHeight: "100vh",
       }}
     >
@@ -68,7 +68,9 @@ export default function TechnikaPage() {
           style={{
             marginTop: "28px",
             marginBottom: "18px",
-            fontSize: "64px",
+          fontSize: "clamp(42px, 9vw, 64px)",
+lineHeight: 1.05,
+letterSpacing: "-1.5px",
             fontWeight: 800,
             color: "#111827",
           }}
@@ -81,8 +83,9 @@ export default function TechnikaPage() {
         <p
           style={{
             marginBottom: "42px",
-            fontSize: "22px",
-            color: "#6b7280",
+fontSize: "clamp(18px, 4vw, 20px)",
+lineHeight: 1.7,
+maxWidth: "900px",            color: "#6b7280",
           }}
         >
           Technika a vybavení připravené k zásahu.
@@ -92,8 +95,7 @@ export default function TechnikaPage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "18px",
+gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",            gap: "18px",
             marginBottom: "36px",
           }}
         >
@@ -129,7 +131,7 @@ export default function TechnikaPage() {
 
                 <div
                   style={{
-                    fontSize: "24px",
+                    fontSize: "22px",
                     fontWeight: 800,
                     marginBottom: "8px",
                   }}
@@ -177,7 +179,7 @@ export default function TechnikaPage() {
                   alt="CAS 30 Šárka"
                   style={{
                     width: "100%",
-                    maxHeight: "620px",
+                    maxHeight: "520px",
                     objectFit: "cover",
                     display: "block",
                   }}
@@ -187,8 +189,7 @@ export default function TechnikaPage() {
               {/* TEXT */}
               <div
                 style={{
-                  padding: "50px",
-                }}
+padding: "clamp(24px, 5vw, 50px)",                }}
               >
                 <div
                   style={{
@@ -208,8 +209,7 @@ export default function TechnikaPage() {
                 <h2
                   style={{
                     margin: 0,
-                    fontSize: "54px",
-                    fontWeight: 800,
+fontSize: "clamp(34px, 7vw, 54px)",                    fontWeight: 800,
                     lineHeight: 1.1,
                     color: "#111827",
                   }}
@@ -220,8 +220,7 @@ export default function TechnikaPage() {
                 <p
                   style={{
                     marginTop: "16px",
-                    fontSize: "28px",
-                    fontWeight: 700,
+fontSize: "clamp(16px, 3.8vw, 20px)",                    fontWeight: 700,
                     color: "#dc2626",
                   }}
                 >

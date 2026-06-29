@@ -237,32 +237,27 @@ export default function VyjezdyPage() {
 
   return (
     <main style={{ background: "#ffffff", minHeight: "100vh" }}>
-      <div
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "40px 32px 80px",
-        }}
-      >
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <BackLink href="/jpo">Zpět na JPO</BackLink>
 
         <h1
           style={{
-            marginTop: "30px",
-            marginBottom: "20px",
-            fontSize: "64px",
+            marginTop: "28px",
+            marginBottom: "18px",
+            fontSize: "clamp(42px, 9vw, 64px)",
             fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: "-1.5px",
           }}
         >
-          Výjezdy{" "}
-          <span style={{ color: "#dc2626" }}>JPO</span>{" "}
+          Výjezdy <span style={{ color: "#dc2626" }}>JPO</span>{" "}
           <span style={{ color: "#111827" }}>Dukovany</span>
         </h1>
 
         <p
           style={{
-            marginBottom: "42px",
-            fontSize: "20px",
+            marginBottom: "34px",
+            fontSize: "clamp(18px, 4vw, 20px)",
             color: "#6b7280",
             lineHeight: 1.7,
             maxWidth: "1000px",
@@ -279,10 +274,10 @@ export default function VyjezdyPage() {
 
         <section
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-            gap: "16px",
-            marginBottom: "36px",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+            marginBottom: "32px",
           }}
         >
           {years.map((item) => {
@@ -298,21 +293,22 @@ export default function VyjezdyPage() {
                   border: isActive
                     ? "1px solid #dc2626"
                     : "1px solid #ececec",
-                  borderRadius: "22px",
-                  padding: "22px",
+                  borderRadius: "20px",
+                  padding: "18px 22px",
                   textAlign: "left",
                   cursor: "pointer",
                   boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+                  minWidth: "120px",
                 }}
               >
-                <div style={{ fontSize: "34px", fontWeight: 800 }}>
+                <div style={{ fontSize: "clamp(28px, 7vw, 34px)", fontWeight: 800 }}>
                   {item.year}
                 </div>
 
                 <div
                   style={{
                     marginTop: "8px",
-                    fontSize: "15px",
+                    fontSize: "14px",
                     color: isActive ? "rgba(255,255,255,0.85)" : "#6b7280",
                   }}
                 >
@@ -328,7 +324,7 @@ export default function VyjezdyPage() {
             background: "#ffffff",
             border: "1px solid #ececec",
             borderRadius: "32px",
-            padding: "46px",
+            padding: "clamp(24px, 5vw, 46px)",
             boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
           }}
         >
@@ -350,7 +346,8 @@ export default function VyjezdyPage() {
           <h2
             style={{
               margin: 0,
-              fontSize: "54px",
+              fontSize: "clamp(34px, 7vw, 54px)",
+              lineHeight: 1.1,
               fontWeight: 800,
               color: "#111827",
             }}
@@ -361,7 +358,7 @@ export default function VyjezdyPage() {
           <p
             style={{
               marginTop: "12px",
-              fontSize: "28px",
+              fontSize: "clamp(20px, 5vw, 28px)",
               fontWeight: 800,
               color: "#dc2626",
             }}
@@ -371,9 +368,9 @@ export default function VyjezdyPage() {
 
           <div
             style={{
-              marginTop: "34px",
+              marginTop: "30px",
               display: "grid",
-              gap: "16px",
+              gap: "14px",
             }}
           >
             {selected.text.map((line, index) => (
@@ -383,8 +380,8 @@ export default function VyjezdyPage() {
                   background: "#fff7f7",
                   border: "1px solid #ffe4e6",
                   borderRadius: "20px",
-                  padding: "18px 22px",
-                  fontSize: "18px",
+                  padding: "18px 20px",
+                  fontSize: "clamp(16px, 3.8vw, 18px)",
                   lineHeight: 1.7,
                   color: "#374151",
                   fontWeight:

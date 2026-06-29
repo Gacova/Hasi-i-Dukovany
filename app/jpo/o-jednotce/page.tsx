@@ -128,7 +128,9 @@ export default function OJednotcePage() {
           style={{
             marginTop: "30px",
             marginBottom: "20px",
-            fontSize: "64px",
+             fontSize: "clamp(42px, 9vw, 64px)",
+lineHeight: 1.05,
+letterSpacing: "-1px",
             fontWeight: 800,
           }}
         >
@@ -153,7 +155,7 @@ export default function OJednotcePage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+           gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
             gap: "18px",
             marginBottom: "36px",
           }}
@@ -208,14 +210,16 @@ export default function OJednotcePage() {
             background: "#ffffff",
             border: "1px solid #ececec",
             borderRadius: "32px",
-            padding: "46px",
+          padding: "clamp(24px, 5vw, 46px)",
             boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
           }}
         >
           <h2
             style={{
               margin: 0,
-              fontSize: "54px",
+             fontSize: "clamp(34px, 7vw, 54px)",
+lineHeight: 1.1,
+letterSpacing: "-1px",
               fontWeight: 800,
               color: "#111827",
             }}
@@ -226,7 +230,8 @@ export default function OJednotcePage() {
           <p
             style={{
               marginTop: "12px",
-              fontSize: "28px",
+              fontSize: "clamp(20px, 5vw, 28px)",
+lineHeight: 1.3,
               fontWeight: 800,
               color: "#dc2626",
             }}

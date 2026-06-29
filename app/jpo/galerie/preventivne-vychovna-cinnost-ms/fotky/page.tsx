@@ -35,7 +35,7 @@ export default function FotkyPage() {
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          padding: "40px 32px 80px",
+          padding: "34px 24px 70px",
         }}
       >
         <BackLink href="/jpo/galerie/preventivne-vychovna-cinnost-ms">
@@ -44,11 +44,13 @@ export default function FotkyPage() {
 
         <h1
           style={{
-            marginTop: "30px",
-            marginBottom: "20px",
-            fontSize: "56px",
+            marginTop: "28px",
+            marginBottom: "18px",
+            fontSize: "clamp(42px, 9vw, 56px)",
+            lineHeight: 1.05,
             fontWeight: 800,
             color: "#111827",
+            letterSpacing: "-1.5px",
           }}
         >
           Galerie preventivně výchovné činnosti
@@ -56,9 +58,11 @@ export default function FotkyPage() {
 
         <p
           style={{
-            marginBottom: "40px",
-            fontSize: "18px",
+            marginBottom: "34px",
+            fontSize: "clamp(18px, 4vw, 20px)",
+            lineHeight: 1.6,
             color: "#6b7280",
+            maxWidth: "820px",
           }}
         >
           Fotografie z návštěvy dětí z Mateřské školy Dukovany na hasičské
@@ -68,23 +72,23 @@ export default function FotkyPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: "20px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+            gap: "16px",
           }}
         >
           {images.map((image, index) => (
             <img
-              key={index}
+              key={image}
               src={image}
               alt={`MŠ Dukovany ${index + 1}`}
               onClick={() => setSelectedImage(image)}
               style={{
                 width: "100%",
-                height: "280px",
+                height: "clamp(160px, 38vw, 300px)",
                 objectFit: "cover",
                 borderRadius: "20px",
                 display: "block",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
                 cursor: "pointer",
               }}
             />
@@ -98,25 +102,25 @@ export default function FotkyPage() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0,0,0,0.85)",
+            background: "rgba(0,0,0,0.88)",
             zIndex: 9999,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "30px",
+            padding: "20px",
           }}
         >
           <button
             onClick={() => setSelectedImage(null)}
             style={{
               position: "absolute",
-              top: "24px",
-              right: "30px",
-              background: "#ffffff",
-              border: "none",
-              borderRadius: "999px",
+              top: "18px",
+              right: "18px",
               width: "46px",
               height: "46px",
+              borderRadius: "999px",
+              border: "none",
+              background: "#ffffff",
               fontSize: "28px",
               fontWeight: 800,
               cursor: "pointer",
@@ -130,8 +134,8 @@ export default function FotkyPage() {
             alt="Zvětšená fotografie"
             onClick={(e) => e.stopPropagation()}
             style={{
-              maxWidth: "95vw",
-              maxHeight: "90vh",
+              maxWidth: "96vw",
+              maxHeight: "88vh",
               objectFit: "contain",
               borderRadius: "18px",
               boxShadow: "0 20px 60px rgba(0,0,0,0.4)",

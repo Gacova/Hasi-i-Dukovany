@@ -9,20 +9,8 @@ export default function UklidZbrojnicePage() {
   ];
 
   return (
-    <main
-      style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        color: "#111827",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "30px 32px 70px",
-        }}
-      >
+    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <BackLink href="/jpo/galerie">Zpět do galerie</BackLink>
 
         <section
@@ -30,29 +18,32 @@ export default function UklidZbrojnicePage() {
             marginTop: "28px",
             background: "#ffffff",
             border: "1px solid #ececec",
-            borderRadius: "24px",
-            padding: "34px",
+            borderRadius: "28px",
+            padding: "clamp(24px, 5vw, 34px)",
             boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
           }}
         >
           <h1
-            style={{
-              margin: 0,
-              fontSize: "56px",
-              fontWeight: 800,
-            }}
-          >
-            Úklid zbrojnice a{" "}
-            <span style={{ color: "#dc2626" }}>techniky</span>
-          </h1>
+  style={{
+    margin: 0,
+    fontSize: "clamp(42px, 9vw, 56px)",
+    lineHeight: 1.05,
+    fontWeight: 800,
+    letterSpacing: "-1.5px",
+    color: "#111827",
+  }}
+>
+  Úklid zbrojnice a techniky
+</h1>
         </section>
 
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "260px 1fr 1.2fr",
-            gap: "24px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "22px",
             marginTop: "28px",
+            alignItems: "stretch",
           }}
         >
           <div
@@ -60,7 +51,7 @@ export default function UklidZbrojnicePage() {
               background: "#fff7f7",
               border: "1px solid #ffe4e6",
               borderRadius: "28px",
-              padding: "34px 24px",
+              padding: "28px 24px",
               textAlign: "center",
             }}
           >
@@ -94,7 +85,7 @@ export default function UklidZbrojnicePage() {
 
             <p
               style={{
-                marginTop: "24px",
+                marginTop: "22px",
                 fontSize: "16px",
                 lineHeight: 1.7,
                 color: "#374151",
@@ -135,17 +126,16 @@ export default function UklidZbrojnicePage() {
                 key={index}
                 style={{
                   display: "flex",
-                  gap: "18px",
-                  padding: "24px",
+                  gap: "16px",
+                  padding: "22px",
                   alignItems: "center",
-                  borderBottom:
-                    index === 3 ? "none" : "1px solid #f3f4f6",
+                  borderBottom: index === 3 ? "none" : "1px solid #f3f4f6",
                 }}
               >
                 <div
                   style={{
-                    width: "46px",
-                    height: "46px",
+                    width: "44px",
+                    height: "44px",
                     borderRadius: "999px",
                     background: "#fff1f2",
                     display: "flex",
@@ -161,8 +151,8 @@ export default function UklidZbrojnicePage() {
                 <p
                   style={{
                     margin: 0,
-                    fontSize: "17px",
-                    lineHeight: 1.6,
+                    fontSize: "16px",
+                    lineHeight: 1.65,
                   }}
                 >
                   {text}
@@ -175,18 +165,18 @@ export default function UklidZbrojnicePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
                 gap: "14px",
               }}
             >
               {galleryImages.map((image, index) => (
                 <img
-                  key={index}
+                  key={image}
                   src={image}
                   alt={`Úklid ${index + 1}`}
                   style={{
                     width: "100%",
-                    height: "190px",
+                    height: "clamp(150px, 42vw, 190px)",
                     objectFit: "cover",
                     borderRadius: "22px",
                     display: "block",
@@ -201,7 +191,7 @@ export default function UklidZbrojnicePage() {
                 display: "block",
                 marginTop: "18px",
                 color: "#dc2626",
-                fontSize: "18px",
+                fontSize: "17px",
                 fontWeight: 800,
                 textDecoration: "none",
                 textAlign: "right",

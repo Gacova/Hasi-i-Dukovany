@@ -49,22 +49,15 @@ export default function ClenoveJPOPage() {
   );
 
   return (
-    <main
-      style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        padding: "40px 32px 80px",
-        color: "#111827",
-      }}
-    >
-      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <a
           href="/jpo"
           style={{
             color: "#dc2626",
             textDecoration: "none",
-            fontSize: "18px",
-            fontWeight: 600,
+            fontSize: "16px",
+            fontWeight: 700,
           }}
         >
           ← Zpět na JPO
@@ -72,23 +65,25 @@ export default function ClenoveJPOPage() {
 
         <h1
           style={{
-            marginTop: "30px",
-            marginBottom: "14px",
-            fontSize: "64px",
+            marginTop: "28px",
+            marginBottom: "18px",
+            fontSize: "clamp(42px, 9vw, 64px)",
             fontWeight: 800,
-            lineHeight: 1,
+            lineHeight: 1.05,
+            letterSpacing: "-1.5px",
           }}
         >
-          Členové{" "}
-          <span style={{ color: "#dc2626" }}>JPO</span>{" "}
+          Členové <span style={{ color: "#dc2626" }}>JPO</span>{" "}
           <span style={{ color: "#111827" }}>Dukovany</span>
         </h1>
 
         <p
           style={{
-            fontSize: "22px",
+            fontSize: "clamp(18px, 4vw, 22px)",
+            lineHeight: 1.6,
             color: "#6b7280",
-            marginBottom: "36px",
+            marginBottom: "32px",
+            maxWidth: "760px",
           }}
         >
           Seznam členů jednotky s jejich funkcemi v JPO Dukovany.
@@ -97,8 +92,8 @@ export default function ClenoveJPOPage() {
         <div
           style={{
             display: "flex",
-            gap: "16px",
             flexWrap: "wrap",
+            gap: "12px",
             marginBottom: "32px",
           }}
         >
@@ -110,15 +105,17 @@ export default function ClenoveJPOPage() {
                 key={section.title}
                 onClick={() => setActiveSection(section.title)}
                 style={{
-                  padding: "14px 24px",
+                  padding: "14px 22px",
                   borderRadius: "999px",
                   background: isActive ? "#dc2626" : "#ffffff",
                   color: isActive ? "#ffffff" : "#374151",
                   border: "1px solid #ececec",
                   boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontWeight: 800,
                   cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  minWidth: "fit-content",
                 }}
               >
                 {section.title} ({section.members.length})
@@ -131,7 +128,7 @@ export default function ClenoveJPOPage() {
           <section
             style={{
               border: "1px solid #ececec",
-              borderRadius: "24px",
+              borderRadius: "28px",
               overflow: "hidden",
               boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
               background: "#ffffff",
@@ -140,14 +137,14 @@ export default function ClenoveJPOPage() {
             <div
               style={{
                 background: "#fff7f7",
-                padding: "22px 28px",
+                padding: "24px",
                 borderBottom: "1px solid #f3f4f6",
               }}
             >
               <h2
                 style={{
                   margin: 0,
-                  fontSize: "28px",
+                  fontSize: "clamp(28px, 7vw, 34px)",
                   fontWeight: 800,
                   color: "#dc2626",
                 }}
@@ -156,58 +153,64 @@ export default function ClenoveJPOPage() {
               </h2>
             </div>
 
-            <div>
-              {selectedSection.members.map((member, index) => (
+            {selectedSection.members.map((member, index) => (
+              <div
+                key={member.name}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr)",
+                  gap: "16px",
+                  alignItems: "start",
+                  padding: "22px 24px",
+                  borderBottom:
+                    index === selectedSection.members.length - 1
+                      ? "none"
+                      : "1px solid #f3f4f6",
+                }}
+              >
                 <div
-                  key={member.name}
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "70px 1fr 1fr",
-                    gap: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "999px",
+                    background: "#fff1f2",
+                    color: "#dc2626",
+                    display: "flex",
                     alignItems: "center",
-                    padding: "20px 28px",
-                    borderBottom:
-                      index === selectedSection.members.length - 1
-                        ? "none"
-                        : "1px solid #f3f4f6",
+                    justifyContent: "center",
+                    fontWeight: 800,
+                    flexShrink: 0,
                   }}
                 >
-                  <div
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "999px",
-                      background: "#fff1f2",
-                      color: "#dc2626",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 800,
-                    }}
-                  >
-                    {index + 1}.
-                  </div>
+                  {index + 1}.
+                </div>
 
-                  <div
+                <div style={{ minWidth: 0 }}>
+                  <h3
                     style={{
-                      fontSize: "22px",
+                      margin: 0,
+                      fontSize: "clamp(19px, 5vw, 22px)",
                       fontWeight: 800,
+                      lineHeight: 1.35,
                     }}
                   >
                     {member.name}
-                  </div>
+                  </h3>
 
-                  <div
+                  <p
                     style={{
-                      fontSize: "19px",
+                      marginTop: "6px",
+                      marginBottom: 0,
+                      fontSize: "16px",
                       color: "#6b7280",
+                      lineHeight: 1.45,
                     }}
                   >
                     {member.role}
-                  </div>
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </section>
         )}
       </div>

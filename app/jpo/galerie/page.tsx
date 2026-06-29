@@ -8,17 +8,19 @@ export default function GaleriePage() {
           maxWidth: "1500px",
           width: "100%",
           margin: "0 auto",
-          padding: "40px 32px 80px",
+          padding: "34px 24px 70px",
         }}
       >
         <BackLink href="/jpo">Zpět na JPO</BackLink>
 
         <h1
           style={{
-            marginTop: "30px",
-            marginBottom: "20px",
-            fontSize: "64px",
+            marginTop: "28px",
+            marginBottom: "18px",
+            fontSize: "clamp(42px, 9vw, 64px)",
+            lineHeight: 1.05,
             fontWeight: 800,
+            letterSpacing: "-1.5px",
           }}
         >
           Galerie <span style={{ color: "#dc2626" }}>JPO</span>{" "}
@@ -27,22 +29,16 @@ export default function GaleriePage() {
 
         <p
           style={{
-            marginBottom: "50px",
-            fontSize: "20px",
+            marginBottom: "36px",
+            fontSize: "clamp(18px, 4vw, 20px)",
+            lineHeight: 1.6,
             color: "#6b7280",
           }}
         >
           Fotografie z výjezdů, školení a činnosti jednotky.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "24px",
-            alignItems: "stretch",
-          }}
-        >
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
           <GalleryCard
             href="/jpo/galerie/skoleni-zdravovedy"
             image="/skoleni-zdravovedy/IMG-20260605-WA0039.jpg"
@@ -89,15 +85,15 @@ function GalleryCard({
 }) {
   return (
     <a href={href} style={{ textDecoration: "none", color: "inherit" }}>
-      <div
+      <article
         style={{
           background: "#ffffff",
           border: "1px solid #ececec",
           borderRadius: "28px",
           overflow: "hidden",
           boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-          cursor: "pointer",
           minHeight: "560px",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
         }}
@@ -124,9 +120,9 @@ function GalleryCard({
           <h2
             style={{
               margin: 0,
-              fontSize: "28px",
+              fontSize: "26px",
               fontWeight: 800,
-              lineHeight: 1.3,
+              lineHeight: 1.25,
               color: "#111827",
             }}
           >
@@ -135,10 +131,11 @@ function GalleryCard({
 
           <p
             style={{
-              marginTop: "16px",
+              marginTop: "14px",
               color: "#6b7280",
               fontSize: "16px",
               lineHeight: 1.7,
+              flex: 1,
             }}
           >
             {text}
@@ -146,16 +143,16 @@ function GalleryCard({
 
           <div
             style={{
-              marginTop: "auto",
+              marginTop: "18px",
               color: "#dc2626",
-              fontWeight: 700,
+              fontWeight: 800,
               fontSize: "16px",
             }}
           >
             Otevřít galerii →
           </div>
         </div>
-      </div>
+      </article>
     </a>
   );
 }
