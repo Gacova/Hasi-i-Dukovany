@@ -1,30 +1,167 @@
-import Link from "next/link";
+import BackLink from "@/components/BackLink";
 
 export default function TaborPage() {
   return (
-    <main className="min-h-screen bg-white px-6 py-14">
-      <section className="mx-auto max-w-5xl">
-        <Link
-          href="/sdh"
-          className="mt-8 block text-sm text-neutral-500 transition hover:text-red-700"
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "40px 32px 80px",
+        }}
+      >
+        <BackLink href="/sdh">Zpět na SDH</BackLink>
+
+        <h1
+          style={{
+            marginTop: "30px",
+            marginBottom: "20px",
+            fontSize: "64px",
+            fontWeight: 800,
+          }}
         >
-          ← Zpět na SDH
-        </Link>
+          Tábor <span style={{ color: "#dc2626" }}>SDH</span>{" "}
+          <span style={{ color: "#111827" }}>Dukovany</span>
+        </h1>
 
-        <div className="mt-6 mb-12">
-          <div className="flex items-baseline gap-4">
-            <h1 className="text-4xl font-bold text-neutral-950">Tábor</h1>
+        <p
+          style={{
+            marginBottom: "40px",
+            fontSize: "20px",
+            color: "#6b7280",
+          }}
+        >
+          Letní tábor plný dobrodružství, her a nových zážitků.
+        </p>
 
-            <span className="text-4xl font-bold text-red-700">
-              SDH Dukovany
-            </span>
+        {/* PLAKÁT */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "50px",
+          }}
+        >
+          <img
+            src="/tabor_letak.png"
+            alt="Příměstský tábor SDH Dukovany"
+            style={{
+              width: "450px",
+              maxWidth: "100%",
+              borderRadius: "24px",
+              display: "block",
+            }}
+          />
+        </div>
+
+        {/* KARTY */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "28px",
+          }}
+        >
+          <div
+            style={{
+              background: "#ffffff",
+              border: "1px solid #ececec",
+              borderRadius: "28px",
+              padding: "32px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+            }}
+          >
+            <h2
+              style={{
+                margin: 0,
+                marginBottom: "18px",
+                fontSize: "32px",
+                fontWeight: 800,
+                color: "#111827",
+              }}
+            >
+              Letní tábor SDH Dukovany
+            </h2>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "18px",
+                lineHeight: 1.8,
+                color: "#4b5563",
+              }}
+            >
+              Každý rok připravujeme pro děti pestrý program plný her,
+              soutěží, sportovních aktivit, výletů a nezapomenutelných
+              zážitků.
+            </p>
+
+            <p
+              style={{
+                marginTop: "18px",
+                fontSize: "18px",
+                lineHeight: 1.8,
+                color: "#4b5563",
+              }}
+            >
+              Tábor je dlouhodobě velmi oblíbený a kapacita bývá rychle
+              naplněna.
+            </p>
           </div>
 
-          <p className="mt-4 text-neutral-600">
-            Letní tábor a informace pro děti i rodiče.
-          </p>
+          <div
+            style={{
+              background: "#ffffff",
+              border: "1px solid #ececec",
+              borderRadius: "28px",
+              padding: "32px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+            }}
+          >
+            <h2
+              style={{
+                margin: 0,
+                marginBottom: "18px",
+                fontSize: "32px",
+                fontWeight: 800,
+                color: "#111827",
+              }}
+            >
+              Informace pro rodiče
+            </h2>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "18px",
+                lineHeight: 1.8,
+                color: "#4b5563",
+              }}
+            >
+              Na této stránce budou postupně zveřejňovány důležité informace,
+              pokyny, seznam vybavení a další dokumenty určené rodičům
+              přihlášených dětí.
+            </p>
+
+            <p
+              style={{
+                marginTop: "18px",
+                fontSize: "18px",
+                lineHeight: 1.8,
+                color: "#4b5563",
+              }}
+            >
+              Veškeré potřebné informace budou k dispozici před zahájením
+              tábora.
+            </p>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

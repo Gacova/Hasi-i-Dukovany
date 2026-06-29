@@ -1,0 +1,54 @@
+# Query: <footer
+# ContextLines: 1
+
+10 results - 10 files
+
+sdh-dukvoany-web\app\layout.tsx:
+  23  
+  24:         <footer className="text-center py-8 text-sm text-gray-400">
+  25            <div>© 2026 Hasiči Dukovany</div>
+
+sdh-dukvoany-web\app\sdh\page.tsx:
+  243  
+  244:       <footer
+  245          style={{
+
+sdh-dukvoany-web\app\sdh\akce\page.tsx:
+  142        {/* FOOTER */}
+  143:       <footer
+  144          style={{
+
+sdh-dukvoany-web\app\sdh\clenove\page.tsx:
+  312  
+  313:       <footer
+  314          style={{
+
+sdh-dukvoany-web\app\sdh\galerie\page.tsx:
+  139        {/* FOOTER */}
+  140:       <footer
+  141          style={{
+
+sdh-dukvoany-web\app\sdh\galerie\carodejnice-2026\page.tsx:
+  126        {/* FOOTER */}
+  127:       <footer
+  128          style={{
+
+sdh-dukvoany-web\app\sdh\kontakt\page.tsx:
+  136        {/* FOOTER */}
+  137:       <footer
+  138          style={{
+
+sdh-dukvoany-web\app\sdh\tabor\page.tsx:
+  126        {/* FOOTER */}
+  127:       <footer
+  128          style={{
+
+sdh-dukvoany-web\app\sdh\treninky\page.tsx:
+  303  
+  304:       <footer
+  305          style={{
+
+sdh-dukvoany-web\app\sdh\vybor\page.tsx:
+  198        {/* FOOTER */}
+  199:       <footer
+  200          style={{

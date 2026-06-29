@@ -1,5 +1,8 @@
+"use client";
+
 import { supabase } from "@/lib/supabase";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import BackLink from "@/components/BackLink";
 
 type Member = {
   id: string;
@@ -9,118 +12,208 @@ type Member = {
   section: string;
 };
 
-export default async function ClenovePage() {
-  const { data: members } = await supabase
-    .from("members")
-    .select("*")
-    .eq("section", "SDH");
+export default function ClenovePage() {
+  const [members, setMembers] = useState<Member[]>([]);
+  const [activeGroup, setActiveGroup] = useState("Muži");
 
-  const muzi =
-    members?.filter((member: Member) => member.group === "Muži") || [];
+  useEffect(() => {
+    loadMembers();
+  }, []);
 
-  const zeny =
-    members?.filter((member: Member) => member.group === "Ženy") || [];
+  async function loadMembers() {
+    const { data, error } = await supabase
+      .from("members")
+      .select("*")
+      .eq("section", "SDH")
+      .order("created_at", { ascending: true });
 
-  const mladez =
-    members?.filter((member: Member) => member.group === "Mládež") || [];
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-  const groups = [
-    { title: "Muži", data: muzi },
-    { title: "Ženy", data: zeny },
-    { title: "Mládež", data: mladez },
-  ];
+    setMembers(data || []);
+  }
+
+  const groups = ["Muži", "Ženy", "Mládež"];
+
+  const filteredMembers = members.filter(
+    (member) => member.group === activeGroup
+  );
 
   return (
-    <main className="min-h-screen bg-white px-6 py-14">
-      {/* 🔥 HOVER STYLE */}
-      <style>
-        {`
-          .member-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 14px 16px;
-            border-radius: 16px;
-            border: 1px solid transparent;
-            transition: all 180ms ease;
-          }
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        padding: "50px 32px 90px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <BackLink href="/sdh">Zpět na SDH</BackLink>
 
-          .member-row:hover {
-            background: #f9fafb;
-            border-color: #e5e7eb;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px);
-          }
-        `}
-      </style>
-
-      <section className="mx-auto max-w-5xl">
-        {/* 🔙 ZPĚT */}
-        <Link
-          href="/sdh"
-          className="mt-8 block text-sm text-neutral-500 transition hover:text-red-700"
+        <h1
+          style={{
+            fontSize: "64px",
+            fontWeight: 800,
+            marginBottom: "24px",
+            color: "#111827",
+          }}
         >
-          ← Zpět na SDH
-        </Link>
+          Členové <span style={{ color: "#dc2626" }}>SDH</span> Dukovany
+        </h1>
 
-        {/* 🔥 NADPIS */}
-        <div className="mt-6 mb-12">
-          <div className="flex items-baseline gap-4">
-            <h1 className="text-4xl font-bold text-neutral-950">
-              Členové
-            </h1>
+        <p
+          style={{
+            fontSize: "22px",
+            lineHeight: 1.7,
+            maxWidth: "850px",
+            marginBottom: "42px",
+            color: "#111827",
+          }}
+        >
+          Náš sbor tvoří dospělí členové, ženy i mladí hasiči. Společně
+          trénujeme, pomáháme při akcích a vytváříme komunitu, která drží při
+          sobě.
+        </p>
 
-            <span className="text-4xl font-bold text-red-700">
-              SDH Dukovany
-            </span>
+        <div
+          style={{
+            display: "flex",
+            gap: "16px",
+            marginBottom: "34px",
+            flexWrap: "wrap",
+          }}
+        >
+          {groups.map((group) => {
+            const count = members.filter((m) => m.group === group).length;
+            const isActive = activeGroup === group;
+
+            return (
+              <button
+                key={group}
+                onClick={() => setActiveGroup(group)}
+                style={{
+                  border: "1px solid #e5e7eb",
+                  borderRadius: "999px",
+                  padding: "16px 28px",
+                  fontSize: "20px",
+                  fontWeight: 800,
+                  cursor: "pointer",
+                  background: isActive ? "#dc2626" : "#ffffff",
+                  color: isActive ? "#ffffff" : "#111827",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+                }}
+              >
+                {group} ({count})
+              </button>
+            );
+          })}
+        </div>
+
+        <section
+          style={{
+            border: "1px solid #ececec",
+            borderRadius: "28px",
+            overflow: "hidden",
+            boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
+            background: "#ffffff",
+          }}
+        >
+          <div
+            style={{
+              background: "#fff7f7",
+              padding: "28px",
+              borderBottom: "1px solid #f3f4f6",
+            }}
+          >
+            <h2
+              style={{
+                margin: 0,
+                fontSize: "34px",
+                fontWeight: 800,
+                color: "#dc2626",
+              }}
+            >
+              {activeGroup}
+            </h2>
           </div>
 
-          <p className="mt-4 text-neutral-600">
-            Přehled členů sboru dobrovolných hasičů.
-          </p>
-        </div>
-
-        {/* 🔥 SEZNAM */}
-        <div className="space-y-8">
-          {groups.map((group) => (
-            <section
-              key={group.title}
-              className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm"
+          {filteredMembers.length === 0 ? (
+            <div
+              style={{
+                padding: "30px",
+                color: "#6b7280",
+              }}
             >
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-red-700">
-                  {group.title}
-                </h2>
+              V této skupině zatím nejsou žádní členové.
+            </div>
+          ) : (
+            filteredMembers.map((member, index) => (
+              <div
+                key={member.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "28px",
+                  padding: "24px 30px",
+                  borderBottom:
+                    index === filteredMembers.length - 1
+                      ? "none"
+                      : "1px solid #f3f4f6",
+                }}
+              >
+                <div
+                  style={{
+                    width: "42px",
+                    height: "42px",
+                    borderRadius: "999px",
+                    background: "#fff1f2",
+                    color: "#dc2626",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: 800,
+                    flexShrink: 0,
+                  }}
+                >
+                  {index + 1}
+                </div>
 
-                <span className="font-bold text-red-700">
-                  {group.data.length}
-                </span>
-              </div>
+                <div>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: "22px",
+                      fontWeight: 800,
+                      color: "#111827",
+                    }}
+                  >
+                    {member.name}
+                  </h3>
 
-              <div className="space-y-2">
-                {group.data.map((member: Member) => (
-                  <div key={member.id} className="member-row">
-                    <span className="font-semibold text-neutral-950">
-                      {member.name}
-                    </span>
-
-                    <span className="text-sm text-neutral-600">
+                  {member.role && (
+                    <p
+                      style={{
+                        marginTop: "6px",
+                        color: "#6b7280",
+                        fontSize: "16px",
+                      }}
+                    >
                       {member.role}
-                    </span>
-                  </div>
-                ))}
-
-                {group.data.length === 0 && (
-                  <p className="px-4 py-3 text-sm text-neutral-400">
-                    Zatím zde nejsou žádní členové.
-                  </p>
-                )}
+                    </p>
+                  )}
+                </div>
               </div>
-            </section>
-          ))}
-        </div>
-      </section>
+            ))
+          )}
+        </section>
+      </div>
     </main>
   );
 }

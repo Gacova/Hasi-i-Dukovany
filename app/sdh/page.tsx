@@ -1,115 +1,213 @@
-import Link from "next/link";
+export default function SDHPage() {
+  const tiles = [
+    {
+      title: "Výbor",
+      text: "Přehled členů výboru SDH a jejich funkcí.",
+      href: "/sdh/vybor",
+    },
+    {
+      title: "Členové",
+      text: "Přehled členů sboru a mladých hasičů.",
+      href: "/sdh/clenove",
+    },
+    {
+      title: "Tréninky",
+      text: "Pravidelné tréninky a důležité informace.",
+      href: "/sdh/treninky",
+    },
+    {
+      title: "Akce",
+      text: "Soutěže, společné akce a další dění.",
+      href: "/sdh/akce",
+    },
+    {
+      title: "Tábor",
+      text: "Letní tábor a informace pro děti i rodiče.",
+      href: "/sdh/tabor",
+    },
+    {
+      title: "Galerie",
+      text: "Fotky z tréninků, akcí a společných setkání.",
+      href: "/sdh/galerie",
+    },
+  ];
 
-export default function SdhPage() {
   return (
-    <main className="bg-white">
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-red-700"
-          >
-            ← Zpět na rozcestník
-          </Link>
-        </div>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "60px 32px 0",
+        }}
+      >
+        <a
+          href="/"
+          style={{
+            color: "#b91c1c",
+            textDecoration: "none",
+            fontSize: "16px",
+            fontWeight: 700,
+            display: "inline-block",
+            marginBottom: "34px",
+          }}
+        >
+          ← Zpět na rozcestník
+        </a>
 
-        {/* HLAVIČKA */}
-        <div className="mb-12 grid items-center gap-8 md:grid-cols-2">
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.15fr",
+            gap: "70px",
+            alignItems: "center",
+            marginBottom: "60px",
+          }}
+        >
           <div>
-            <h1 className="text-5xl font-bold text-neutral-900">
-              SDH Dukovany
+            <h1
+              style={{
+                margin: 0,
+                fontSize: "72px",
+                lineHeight: 1,
+                fontWeight: 800,
+                letterSpacing: "-2px",
+              }}
+            >
+              <span style={{ color: "#b91c1c" }}>SDH </span>
+              <span style={{ color: "#111827" }}>Dukovany</span>
             </h1>
 
-            <p className="mt-4 text-xl text-neutral-600">
+            <p
+              style={{
+                marginTop: "24px",
+                fontSize: "26px",
+                color: "#4b5563",
+              }}
+            >
               Pomáháme, trénujeme, držíme spolu.
             </p>
 
-            <div className="mt-8">
-              <Link
-                href="/sdh/kontakt"
-                className="inline-block rounded-full bg-red-700 px-6 py-3 text-sm font-semibold text-white hover:bg-red-800"
+            <p
+              style={{
+                marginTop: "28px",
+                maxWidth: "520px",
+                fontSize: "20px",
+                lineHeight: 1.7,
+                color: "#111827",
+              }}
+            >
+              Sbor dobrovolných hasičů Dukovany je tu pro naši obec a její
+              obyvatele. Pomáháme při mimořádných událostech, pracujeme s
+              mládeží a pořádáme akce, které spojují naši komunitu.
+            </p>
+
+            <a
+              href="/sdh/kontakt"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "12px",
+                marginTop: "34px",
+                background: "#b91c1c",
+                color: "white",
+                padding: "16px 34px",
+                borderRadius: "999px",
+                textDecoration: "none",
+                fontSize: "18px",
+                fontWeight: 800,
+                boxShadow: "0 10px 25px rgba(185,28,28,0.25)",
+              }}
+            >
+              Kontakt
+            </a>
+          </div>
+
+          <img
+            src="/sdh.jpg"
+            alt="SDH Dukovany"
+            style={{
+              width: "100%",
+              height: "430px",
+              objectFit: "cover",
+              borderRadius: "28px",
+              display: "block",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+            }}
+          />
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "28px",
+            marginBottom: "70px",
+          }}
+        >
+          {tiles.map((tile) => (
+            <a
+              key={tile.title}
+              href={tile.href}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <article
+                style={{
+                  minHeight: "190px",
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: "28px",
+                  padding: "34px",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
               >
-                Přidej se k nám
-              </Link>
-            </div>
-          </div>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: "30px",
+                    fontWeight: 800,
+                  }}
+                >
+                  {tile.title}
+                </h2>
 
-          {/* 🔥 TADY JE TEN OBRÁZEK */}
-          <div className="flex justify-center md:justify-end">
-            <img
-              src="/small.jpg"
-              alt="SDH Dukovany"
-              className="w-64 h-auto rounded-2xl object-contain"
-            />
-          </div>
-        </div>
+                <p
+                  style={{
+                    marginTop: "12px",
+                    marginBottom: "22px",
+                    fontSize: "18px",
+                    lineHeight: 1.55,
+                    color: "#4b5563",
+                  }}
+                >
+                  {tile.text}
+                </p>
 
-        {/* 🔥 MEZERA POD OBRÁZKEM */}
-        <div className="mt-12"></div>
-
-        {/* DLAŽDICE */}
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Výbor</h2>
-            <p className="mt-3 text-neutral-600">
-              Přehled členů výboru SDH a jejich funkcí.
-            </p>
-            <Link href="/sdh/vybor" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Členové</h2>
-            <p className="mt-3 text-neutral-600">
-              Přehled členů sboru a mladých hasičů.
-            </p>
-            <Link href="/sdh/clenove" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Tréninky</h2>
-            <p className="mt-3 text-neutral-600">
-              Pravidelné tréninky a důležité informace.
-            </p>
-            <Link href="/sdh/treninky" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Akce</h2>
-            <p className="mt-3 text-neutral-600">
-              Soutěže, společné akce a další dění.
-            </p>
-            <Link href="/sdh/akce" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Tábor</h2>
-            <p className="mt-3 text-neutral-600">
-              Letní tábor a informace pro děti i rodiče.
-            </p>
-            <Link href="/sdh/tabor" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold">Galerie</h2>
-            <p className="mt-3 text-neutral-600">
-              Fotky z tréninků, akcí a společných setkání.
-            </p>
-            <Link href="/sdh/galerie" className="mt-6 inline-block text-red-600">
-              Otevřít sekci
-            </Link>
-          </div>
-        </div>
-      </section>
+                <span
+                  style={{
+                    color: "#b91c1c",
+                    fontSize: "18px",
+                    fontWeight: 800,
+                  }}
+                >
+                  Otevřít sekci →
+                </span>
+              </article>
+            </a>
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

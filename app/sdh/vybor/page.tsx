@@ -1,4 +1,4 @@
-import Link from "next/link";
+import BackLink from "@/components/BackLink";
 
 export default function VyborPage() {
   const committeeMembers = [
@@ -6,11 +6,13 @@ export default function VyborPage() {
       name: "Marcela Vrbková",
       role: "Starostka SDH",
       email: "mail",
+      image: "/20260531_103645.jpg",
     },
     {
       name: "Jan Vrbka",
       role: "1. náměstek starostky",
       email: "mail",
+      image: "/20260531_103736.jpg",
     },
     {
       name: "Bc. Pavel Stuchlík, DiS.",
@@ -33,78 +35,148 @@ export default function VyborPage() {
       name: "Vladimír Troščák",
       role: "Člen výboru",
       email: "mail",
+      image: "/IMG-20260531-WA0010.jpg",
     },
     {
       name: "Tomáš Vorel",
       role: "Člen výboru",
       email: "mail",
+      image: "/20260531_171357.jpg",
     },
   ];
 
   return (
-    <main className="bg-white">
-      <section className="mx-auto max-w-5xl px-4 py-10">
-        {/* Zpět */}
-        <div className="mb-6">
-          <Link
-            href="/sdh"
-            className="text-sm font-medium text-neutral-600 hover:text-red-700"
-          >
-            ← Zpět na SDH
-          </Link>
-        </div>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          maxWidth: "1400px",
+          width: "100%",
+          margin: "0 auto",
+          padding: "40px 32px 80px",
+        }}
+      >
+        <BackLink href="/sdh">Zpět na SDH</BackLink>
 
-        {/* HEADER STEJNÝ JAKO ČLENOVÉ */}
-        <div className="mb-8">
-          <div className="flex items-baseline gap-4">
-            <h1 className="text-3xl font-bold text-neutral-900">
-              Výbor
-            </h1>
+        <h1
+          style={{
+            marginTop: "30px",
+            marginBottom: "20px",
+            fontSize: "64px",
+            fontWeight: 800,
+          }}
+        >
+          Výbor{" "}
+          <span style={{ color: "#dc2626" }}>SDH</span>{" "}
+          <span style={{ color: "#111827" }}>Dukovany</span>
+        </h1>
 
-            <span className="text-3xl font-bold text-red-700">
-              SDH Dukovany
-            </span>
-          </div>
+        <p
+          style={{
+            marginBottom: "50px",
+            fontSize: "20px",
+            color: "#6b7280",
+          }}
+        >
+          Přehled členů výboru SDH a jejich funkcí.
+        </p>
 
-          <p className="mt-4 text-neutral-600">
-            Přehled členů výboru SDH a jejich funkcí.
-          </p>
-        </div>
-
-        {/* GRID */}
-        <div className="mt-8 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "22px",
+          }}
+        >
           {committeeMembers.map((member) => (
             <div
               key={member.name}
-              className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              style={{
+                background: "#ffffff",
+                border: "1px solid #ececec",
+                borderRadius: "28px",
+                overflow: "hidden",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+              }}
             >
-              {/* FOTO */}
-              <div className="h-36 w-full bg-neutral-100 flex items-center justify-center p-3">
+              <div
+                style={{
+                  width: "100%",
+                  height: "360px",
+                  background: "#f3f4f6",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "12px",
+                }}
+              >
                 {member.image ? (
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="max-h-full max-w-full object-contain"
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
                   />
                 ) : (
-                  <div className="text-xs text-neutral-400">
+                  <div
+                    style={{
+                      color: "#9ca3af",
+                      fontSize: "16px",
+                    }}
+                  >
                     Fotka člena
                   </div>
                 )}
               </div>
 
-              {/* TEXT */}
-              <div className="p-4 text-center">
-                <h2 className="text-sm font-semibold leading-snug text-neutral-900 break-words min-h-[40px] flex items-center justify-center">
+              <div
+                style={{
+                  padding: "22px",
+                  textAlign: "center",
+                }}
+              >
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: "20px",
+                    fontWeight: 800,
+                    lineHeight: 1.4,
+                    color: "#111827",
+                  }}
+                >
                   {member.name}
                 </h2>
 
-                <p className="mt-1 text-xs text-neutral-600">
+                <p
+                  style={{
+                    marginTop: "10px",
+                    fontSize: "16px",
+                    color: "#6b7280",
+                  }}
+                >
                   {member.role}
                 </p>
 
                 {member.email !== "mail" && (
-                  <p className="mt-2 text-xs text-red-600 break-all">
+                  <p
+                    style={{
+                      marginTop: "14px",
+                      fontSize: "15px",
+                      color: "#dc2626",
+                      wordBreak: "break-word",
+                    }}
+                  >
                     {member.email}
                   </p>
                 )}
@@ -112,7 +184,7 @@ export default function VyborPage() {
             </div>
           ))}
         </div>
-      </section>
+      </div>
     </main>
   );
 }

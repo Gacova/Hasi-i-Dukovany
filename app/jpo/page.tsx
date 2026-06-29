@@ -1,125 +1,158 @@
 import Link from "next/link";
 
 export default function JpoPage() {
+  const cards = [
+    {
+      title: "O jednotce",
+      text: "Základní informace o zásahové jednotce.",
+      href: "/jpo/o-jednotce",
+    },
+    {
+      title: "Členové",
+      text: "Přehled členů jednotky.",
+      href: "/jpo/clenove",
+    },
+    {
+      title: "Výjezdy",
+      text: "Zásahy a stručné informace o výjezdech.",
+      href: "/jpo/vyjezdy",
+    },
+    {
+      title: "Technika",
+      text: "Vozidla, vybavení a používaná technika.",
+      href: "/jpo/technika",
+    },
+    {
+      title: "Galerie",
+      text: "Fotky z výjezdů a činnosti jednotky.",
+      href: "/jpo/galerie",
+    },
+    {
+      title: "Kontakt",
+      text: "Kontaktní údaje a důležité informace.",
+      href: "/jpo/kontakt",
+    },
+  ];
+
   return (
-    <main className="bg-white">
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition hover:text-red-700"
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "60px 32px 0",
+        }}
+      >
+        <Link
+          href="/"
+          style={{
+            color: "#b91c1c",
+            textDecoration: "none",
+            fontSize: "16px",
+            fontWeight: 700,
+            display: "inline-block",
+            marginBottom: "34px",
+          }}
+        >
+          ← Zpět na rozcestník
+        </Link>
+
+        <section style={{ marginBottom: "70px" }}>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "72px",
+              lineHeight: 1,
+              fontWeight: 800,
+              letterSpacing: "-2px",
+            }}
           >
-            ← Zpět na rozcestník
-          </Link>
-        </div>
+            <span style={{ color: "#b91c1c" }}>JPO </span>
+            <span style={{ color: "#111827" }}>Dukovany</span>
+          </h1>
 
-        <div className="mb-16 grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <h1 className="text-5xl font-bold text-neutral-900">
-              JPO Dukovany
-            </h1>
+          <p
+            style={{
+              marginTop: "24px",
+              fontSize: "26px",
+              color: "#4b5563",
+            }}
+          >
+            Zásahová jednotka, technika a důležité informace.
+          </p>
+        </section>
 
-            <p className="mt-4 text-xl text-neutral-600">
-              Zásahová jednotka, technika a důležité informace.
-            </p>
-
-            <div className="mt-8 mb-12">
-              <Link
-                href="/jpo/kontakt"
-                className="inline-block rounded-full bg-red-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-800"
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "28px",
+            marginBottom: "70px",
+          }}
+        >
+          {cards.map((card) => (
+            <Link
+              key={card.title}
+              href={card.href}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <article
+                style={{
+                  minHeight: "190px",
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: "28px",
+                  padding: "34px",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
               >
-                Kontaktovat jednotku
-              </Link>
-            </div>
-          </div>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: "34px",
+                    fontWeight: 800,
+                  }}
+                >
+                  {card.title}
+                </h2>
 
-          <div className="flex justify-center md:justify-end">
-            <div className="flex h-80 w-full max-w-md items-center justify-center rounded-[2rem] bg-neutral-100 text-neutral-400">
-              Hlavní fotka
-            </div>
-          </div>
-        </div>
+                <p
+                  style={{
+                    marginTop: "16px",
+                    marginBottom: "22px",
+                    fontSize: "19px",
+                    lineHeight: 1.55,
+                    color: "#4b5563",
+                  }}
+                >
+                  {card.text}
+                </p>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">O jednotce</h2>
-            <p className="mt-3 text-neutral-600">
-              Základní informace o zásahové jednotce.
-            </p>
-            <Link
-              href="/jpo/o-jednotce"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
+                <span
+                  style={{
+                    color: "#b91c1c",
+                    fontSize: "19px",
+                    fontWeight: 800,
+                  }}
+                >
+                  Otevřít sekci →
+                </span>
+              </article>
             </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">Členové</h2>
-            <p className="mt-3 text-neutral-600">
-              Přehled členů jednotky.
-            </p>
-            <Link
-              href="/jpo/clenove"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">Výjezdy</h2>
-            <p className="mt-3 text-neutral-600">
-              Zásahy a stručné informace o výjezdech.
-            </p>
-            <Link
-              href="/jpo/vyjezdy"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">Technika</h2>
-            <p className="mt-3 text-neutral-600">
-              Vozidla, vybavení a používaná technika.
-            </p>
-            <Link
-              href="/jpo/technika"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">Galerie</h2>
-            <p className="mt-3 text-neutral-600">
-              Fotky z výjezdů, techniky a činnosti jednotky.
-            </p>
-            <Link
-              href="/jpo/galerie"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
-            </Link>
-          </div>
-
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <h2 className="text-2xl font-bold text-neutral-900">Kontakt</h2>
-            <p className="mt-3 text-neutral-600">
-              Kontaktní údaje a důležité informace.
-            </p>
-            <Link
-              href="/jpo/kontakt"
-              className="mt-6 inline-block text-sm font-medium text-red-600 hover:text-red-700"
-            >
-              Otevřít sekci
-            </Link>
-          </div>
-        </div>
-      </section>
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

@@ -21,17 +21,15 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="mt-20 border-t border-neutral-100 bg-white">
-          <div className="mx-auto max-w-5xl px-6 py-8 text-center text-xs text-neutral-400">
-            <p>© {new Date().getFullYear()} Hasiči Dukovany</p>
+        <footer className="text-center py-8 text-sm text-gray-400">
+          <div>© 2026 Hasiči Dukovany</div>
 
-            <a
-              href="/admin/login"
-              className="mt-1 inline-block transition hover:text-red-700"
-            >
-              Administrace
-            </a>
-          </div>
+          <a
+            href="/admin"
+            className="block mt-2 hover:text-red-700 transition-colors"
+          >
+            Administrace
+          </a>
         </footer>
       </body>
     </html>

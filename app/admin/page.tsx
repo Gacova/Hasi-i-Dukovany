@@ -1,274 +1,169 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-type Member = {
-  id: string;
-  name: string;
-  role: string;
-  group: string;
-  section: string;
-};
-
-const inputStyle = {
-  width: "100%",
-  borderRadius: "14px",
-  border: "1px solid #d4d4d4",
-  padding: "13px 18px",
-  fontSize: "16px",
-  color: "#171717",
-  backgroundColor: "#fafafa",
-  outline: "none",
-  boxSizing: "border-box" as const,
-};
+import { supabase } from "@/lib/supabase";
 
 export default function AdminPage() {
   const router = useRouter();
-
-  const [members, setMembers] = useState<Member[]>([]);
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [group, setGroup] = useState("Muži");
-  const [message, setMessage] = useState("");
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [hoverLogout, setHoverLogout] = useState(false);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
-  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const checkLogin = async () => {
+      const { data } = await supabase.auth.getSession();
+
+      if (!data.session) {
+        router.push("/admin/login");
+        return;
+      }
+
+      setLoading(false);
+    };
+
     checkLogin();
-    loadMembers();
-  }, []);
+  }, [router]);
 
-  async function checkLogin() {
-    const { data } = await supabase.auth.getSession();
-    if (!data.session) router.push("/admin/login");
-  }
-
-  async function loadMembers() {
-    const { data } = await supabase
-      .from("members")
-      .select("*")
-      .eq("section", "SDH")
-      .order("created_at", { ascending: true });
-
-    setMembers(data || []);
-  }
-
-  async function handleSave() {
-    if (!name || !role) return;
-
-    if (editingId) {
-      await supabase
-        .from("members")
-        .update({ name, role, group })
-        .eq("id", editingId);
-    } else {
-      await supabase.from("members").insert([
-        { name, role, group, section: "SDH" },
-      ]);
-    }
-
-    setName("");
-    setRole("");
-    setGroup("Muži");
-    setEditingId(null);
-    loadMembers();
-  }
-
-  function startEdit(member: Member) {
-    setEditingId(member.id);
-    setName(member.name);
-    setRole(member.role);
-    setGroup(member.group);
-  }
-
-  function cancelEdit() {
-    setEditingId(null);
-    setName("");
-    setRole("");
-    setGroup("Muži");
-  }
-
-  async function handleDelete(id: string) {
-    if (!confirm("Opravdu chceš smazat tohoto člena?")) return;
-
-    await supabase.from("members").delete().eq("id", id);
-    loadMembers();
-  }
-
-  async function handleLogout() {
+  const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/admin/login");
-  }
+  };
 
-  const filteredMembers = members.filter((member) =>
-    `${member.name} ${member.role} ${member.group}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
-
-  return (
-    <main style={{ background: "white", padding: "56px 24px" }}>
-      <section
+  if (loading) {
+    return (
+      <main
         style={{
-          maxWidth: "620px",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "32px",
+          padding: "60px 24px",
+          background: "#fff",
+          minHeight: "100vh",
         }}
       >
-        {/* FORM */}
-        <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-          <div className="mb-6 flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Administrace</h1>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <p>Ověřuji přihlášení...</p>
+        </div>
+      </main>
+    );
+  }
 
-            <button
-              onClick={handleLogout}
-              onMouseEnter={() => setHoverLogout(true)}
-              onMouseLeave={() => setHoverLogout(false)}
+  return (
+    <main
+      style={{
+        background: "#fff",
+        minHeight: "100vh",
+        padding: "60px 24px",
+      }}
+    >
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "40px",
+          }}
+        >
+          <div>
+            <h1
               style={{
-                padding: "6px 10px",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontSize: "14px",
-                color: hoverLogout ? "#171717" : "#737373",
-                backgroundColor: hoverLogout ? "#f5f5f5" : "transparent",
-                transition: "all 150ms ease",
+                fontSize: "48px",
+                fontWeight: 800,
+                marginBottom: "12px",
               }}
             >
-              Odhlásit se
-            </button>
+              Administrace
+            </h1>
+
+            <p style={{ color: "#6b7280", fontSize: "18px", margin: 0 }}>
+              Vyber sekci, kterou chceš spravovat.
+            </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            <input placeholder="Jméno" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
-            <input placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)} style={inputStyle} />
-
-            <select value={group} onChange={(e) => setGroup(e.target.value)} style={inputStyle}>
-              <option>Muži</option>
-              <option>Ženy</option>
-              <option>Mládež</option>
-            </select>
-
-            <button
-              onClick={handleSave}
-              style={{
-                width: "100%",
-                borderRadius: "14px",
-                border: "none",
-                padding: "13px 18px",
-                fontSize: "16px",
-                fontWeight: 700,
-                color: "white",
-                backgroundColor: "#b91c1c",
-                cursor: "pointer",
-              }}
-            >
-              {editingId ? "Uložit úpravu" : "Přidat člena"}
-            </button>
-
-            {editingId && (
-              <button
-                onClick={cancelEdit}
-                style={{
-                  width: "100%",
-                  borderRadius: "14px",
-                  border: "none",
-                  padding: "13px 18px",
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  backgroundColor: "#f5f5f5",
-                  cursor: "pointer",
-                }}
-              >
-                Zrušit úpravu
-              </button>
-            )}
-          </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              background: "#dc2626",
+              color: "#fff",
+              border: "none",
+              borderRadius: "14px",
+              padding: "12px 20px",
+              fontSize: "15px",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Odhlásit se
+          </button>
         </div>
 
-        {/* LIST */}
-        <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-          <h2 className="mb-4 text-xl font-bold text-red-700">Členové SDH</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "24px",
+          }}
+        >
+          <a
+            href="/admin/clenove"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div style={cardStyle}>
+              <div style={{ fontSize: "48px" }}>👥</div>
+              <h2 style={titleStyle}>Správa členů</h2>
+              <p style={textStyle}>Přidávání, úprava a mazání členů SDH.</p>
+            </div>
+          </a>
 
-          <input
-            type="text"
-            placeholder="Vyhledat člena..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{ ...inputStyle, marginBottom: "20px" }}
-          />
+          <a
+            href="/admin/finance"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div style={cardStyle}>
+              <div style={{ fontSize: "48px" }}>💰</div>
+              <h2 style={titleStyle}>Finance</h2>
+              <p style={textStyle}>Evidence příjmů, výdajů a zůstatku.</p>
+            </div>
+          </a>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {filteredMembers.map((member) => (
-              <div
-                key={member.id}
-                onMouseEnter={() => setHoveredId(member.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "14px 16px",
-                  borderRadius: "16px",
-                  backgroundColor: hoveredId === member.id ? "#f9fafb" : "white",
-                  boxShadow: hoveredId === member.id ? "0 10px 20px rgba(0,0,0,0.08)" : "none",
-                  transition: "all 150ms ease",
-                }}
-              >
-                <div>
-                  <p style={{ fontWeight: 700 }}>{member.name}</p>
-                  <p style={{ fontSize: "14px", color: "#666" }}>
-                    {member.group} · {member.role}
-                  </p>
-                </div>
+          <a
+            href="/admin/zapisy"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div style={cardStyle}>
+              <div style={{ fontSize: "48px" }}>📝</div>
+              <h2 style={titleStyle}>Zápisy z výboru</h2>
+              <p style={textStyle}>Nahrávání a správa zápisů výboru.</p>
+            </div>
+          </a>
 
-                <div style={{ display: "flex", gap: "8px" }}>
-                  <button
-                    onClick={() => startEdit(member)}
-                    onMouseEnter={() => setHoveredButton(`edit-${member.id}`)}
-                    onMouseLeave={() => setHoveredButton(null)}
-                    style={{
-                      padding: "6px 12px",
-                      borderRadius: "999px",
-                      backgroundColor:
-                        hoveredButton === `edit-${member.id}` ? "#b91c1c" : "#fee2e2",
-                      color:
-                        hoveredButton === `edit-${member.id}` ? "white" : "#b91c1c",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Upravit
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(member.id)}
-                    onMouseEnter={() => setHoveredButton(`delete-${member.id}`)}
-                    onMouseLeave={() => setHoveredButton(null)}
-                    style={{
-                      padding: "6px 12px",
-                      borderRadius: "999px",
-                      backgroundColor:
-                        hoveredButton === `delete-${member.id}` ? "#404040" : "#f5f5f5",
-                      color:
-                        hoveredButton === `delete-${member.id}` ? "white" : "#404040",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Smazat
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <a
+            href="/admin/jpo-vyjezdy"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div style={cardStyle}>
+              <div style={{ fontSize: "48px" }}>🚒</div>
+              <h2 style={titleStyle}>Výjezdy JPO</h2>
+              <p style={textStyle}>Přidávání a správa výjezdů jednotky.</p>
+            </div>
+          </a>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
+
+const cardStyle = {
+  border: "1px solid #ececec",
+  borderRadius: "24px",
+  padding: "32px",
+  minHeight: "220px",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+};
+
+const titleStyle = {
+  marginTop: "20px",
+  fontSize: "28px",
+  fontWeight: 800,
+};
+
+const textStyle = {
+  color: "#6b7280",
+};
