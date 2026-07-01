@@ -62,8 +62,7 @@ export default function GaleriePage() {
 
           <GalleryCard
             href="/jpo/galerie/paleni-carodejnic"
-            image="/paleni-carodejnic/uvodni.jpg"
-            title="Pálení čarodějnic"
+image="/paleni-carodejnic/uvodni.JPG"            title="Pálení čarodějnic"
             text="Jednotka JPO Dukovany během akce zajišťovala požární dohled nad vatrou a po skončení provedla bezpečné dohašení."
           />
 
