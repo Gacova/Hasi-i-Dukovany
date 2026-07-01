@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -16,11 +17,15 @@ export default function HomePage() {
         <div className="mx-auto mt-10 grid w-full max-w-sm gap-6 sm:mt-14 sm:max-w-5xl md:grid-cols-2 md:gap-8">
           {/* SDH */}
           <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <div className="h-64 w-full overflow-hidden sm:h-80 md:h-96">
-              <img
+            <div className="relative h-64 w-full overflow-hidden sm:h-80 md:h-96">
+              <Image
                 src="/sdh.jpg"
                 alt="SDH Dukovany"
-                className="h-full w-full object-cover transition duration-300 hover:scale-105"
+                fill
+                priority
+                quality={100}
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-cover"
               />
             </div>
 
@@ -47,11 +52,14 @@ export default function HomePage() {
 
           {/* JPO */}
           <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <div className="h-64 w-full overflow-hidden bg-white sm:h-80 md:h-96">
-              <img
+            <div className="relative h-64 w-full overflow-hidden bg-white sm:h-80 md:h-96">
+              <Image
                 src="/jpo.png"
                 alt="JPO Dukovany"
-                className="h-full w-full object-contain"
+                fill
+                quality={100}
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-contain"
               />
             </div>
 

@@ -229,14 +229,12 @@ fontSize: "clamp(16px, 3.8vw, 20px)",                    fontWeight: 700,
 
                 {/* STATY */}
                 <div
-                  style={{
-                    marginTop: "34px",
-                    marginBottom: "40px",
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, 1fr)",
-                    gap: "18px",
-                  }}
-                >
+  className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5"
+  style={{
+    marginTop: "34px",
+    marginBottom: "40px",
+  }}
+>
                   {[
                     ["💧", "8500 l", "vody"],
                     ["🧪", "510 l", "pěnidla"],

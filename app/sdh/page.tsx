@@ -50,7 +50,13 @@ export default function SDHPage() {
               <span style={{ color: "#111827" }}>Dukovany</span>
             </h1>
 
-            <p style={{ marginTop: "22px", fontSize: "clamp(22px, 5vw, 26px)", color: "#4b5563" }}>
+            <p
+              style={{
+                marginTop: "22px",
+                fontSize: "clamp(22px, 5vw, 26px)",
+                color: "#4b5563",
+              }}
+            >
               Pomáháme, trénujeme, držíme spolu.
             </p>
 
@@ -93,9 +99,11 @@ export default function SDHPage() {
             <Image
               src="/sdh.jpg"
               alt="SDH Dukovany"
-              width={700}
-              height={525}
+              width={900}
+              height={675}
               priority
+              quality={100}
+              sizes="(max-width: 768px) 100vw, 700px"
               style={{
                 width: "100%",
                 maxWidth: "700px",
@@ -110,7 +118,11 @@ export default function SDHPage() {
 
         <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {tiles.map((tile) => (
-            <a key={tile.title} href={tile.href} style={{ textDecoration: "none", color: "inherit" }}>
+            <a
+              key={tile.title}
+              href={tile.href}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <article
                 style={{
                   minHeight: "185px",

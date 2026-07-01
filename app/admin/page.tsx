@@ -30,13 +30,7 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <main
-        style={{
-          padding: "60px 24px",
-          background: "#fff",
-          minHeight: "100vh",
-        }}
-      >
+      <main style={{ padding: "60px 24px", background: "#fff", minHeight: "100vh" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <p>Ověřuji přihlášení...</p>
         </div>
@@ -45,34 +39,32 @@ export default function AdminPage() {
   }
 
   return (
-    <main
-      style={{
-        background: "#fff",
-        minHeight: "100vh",
-        padding: "60px 24px",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <main style={{ background: "#fff", minHeight: "100vh" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 24px 80px" }}>
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "40px",
+            alignItems: "flex-start",
+            gap: "20px",
+            marginBottom: "36px",
           }}
         >
           <div>
             <h1
               style={{
-                fontSize: "48px",
+                fontSize: "clamp(42px, 9vw, 48px)",
+                lineHeight: 1.05,
                 fontWeight: 800,
-                marginBottom: "12px",
+                margin: 0,
+                color: "#111827",
               }}
             >
               Administrace
             </h1>
 
-            <p style={{ color: "#6b7280", fontSize: "18px", margin: 0 }}>
+            <p style={{ color: "#6b7280", fontSize: "18px", marginTop: "14px" }}>
               Vyber sekci, kterou chceš spravovat.
             </p>
           </div>
@@ -88,82 +80,89 @@ export default function AdminPage() {
               fontSize: "15px",
               fontWeight: 700,
               cursor: "pointer",
+              whiteSpace: "nowrap",
             }}
           >
             Odhlásit se
           </button>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "24px",
-          }}
-        >
-          <a
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <AdminCard
             href="/admin/clenove"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div style={cardStyle}>
-              <div style={{ fontSize: "48px" }}>👥</div>
-              <h2 style={titleStyle}>Správa členů</h2>
-              <p style={textStyle}>Přidávání, úprava a mazání členů SDH.</p>
-            </div>
-          </a>
+            icon="👥"
+            title="Správa členů"
+            text="Přidávání, úprava a mazání členů SDH."
+          />
 
-          <a
+          <AdminCard
             href="/admin/finance"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div style={cardStyle}>
-              <div style={{ fontSize: "48px" }}>💰</div>
-              <h2 style={titleStyle}>Finance</h2>
-              <p style={textStyle}>Evidence příjmů, výdajů a zůstatku.</p>
-            </div>
-          </a>
+            icon="💰"
+            title="Finance"
+            text="Evidence příjmů, výdajů a zůstatku."
+          />
 
-          <a
+          <AdminCard
             href="/admin/zapisy"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div style={cardStyle}>
-              <div style={{ fontSize: "48px" }}>📝</div>
-              <h2 style={titleStyle}>Zápisy z výboru</h2>
-              <p style={textStyle}>Nahrávání a správa zápisů výboru.</p>
-            </div>
-          </a>
+            icon="📝"
+            title="Zápisy z výboru"
+            text="Nahrávání a správa zápisů výboru."
+          />
 
-          <a
+          <AdminCard
             href="/admin/jpo-vyjezdy"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div style={cardStyle}>
-              <div style={{ fontSize: "48px" }}>🚒</div>
-              <h2 style={titleStyle}>Výjezdy JPO</h2>
-              <p style={textStyle}>Přidávání a správa výjezdů jednotky.</p>
-            </div>
-          </a>
+            icon="🚒"
+            title="Výjezdy JPO"
+            text="Přidávání a správa výjezdů jednotky."
+          />
         </div>
       </div>
     </main>
   );
 }
 
-const cardStyle = {
-  border: "1px solid #ececec",
-  borderRadius: "24px",
-  padding: "32px",
-  minHeight: "220px",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-};
+function AdminCard({
+  href,
+  icon,
+  title,
+  text,
+}: {
+  href: string;
+  icon: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <a href={href} style={{ textDecoration: "none", color: "inherit" }}>
+      <article
+        style={{
+          border: "1px solid #ececec",
+          borderRadius: "24px",
+          padding: "28px",
+          minHeight: "220px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ fontSize: "44px" }}>{icon}</div>
 
-const titleStyle = {
-  marginTop: "20px",
-  fontSize: "28px",
-  fontWeight: 800,
-};
+        <h2
+          style={{
+            marginTop: "20px",
+            marginBottom: "10px",
+            fontSize: "26px",
+            lineHeight: 1.2,
+            fontWeight: 800,
+          }}
+        >
+          {title}
+        </h2>
 
-const textStyle = {
-  color: "#6b7280",
-};
+        <p style={{ color: "#6b7280", lineHeight: 1.6, margin: 0 }}>
+          {text}
+        </p>
+      </article>
+    </a>
+  );
+}

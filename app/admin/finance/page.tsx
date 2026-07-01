@@ -117,14 +117,8 @@ export default function FinancePage() {
 
   if (checkingLogin) {
     return (
-      <main
-        style={{
-          background: "#ffffff",
-          minHeight: "100vh",
-          padding: "50px 24px",
-        }}
-      >
-        <section style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <main style={{ background: "#ffffff", minHeight: "100vh" }}>
+        <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "50px 24px" }}>
           <p>Ověřuji přihlášení...</p>
         </section>
       </main>
@@ -132,19 +126,15 @@ export default function FinancePage() {
   }
 
   return (
-    <main
-      style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        padding: "50px 24px",
-      }}
-    >
-      <section style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
+      <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-between",
             alignItems: "center",
+            gap: "16px",
             marginBottom: "28px",
           }}
         >
@@ -152,91 +142,33 @@ export default function FinancePage() {
             ← Zpět do administrace
           </a>
 
-          <button
-            onClick={handleLogout}
-            style={{
-              background: "#dc2626",
-              color: "#fff",
-              border: "none",
-              borderRadius: "14px",
-              padding: "10px 16px",
-              fontSize: "14px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
+          <button onClick={handleLogout} style={logoutButtonStyle}>
             Odhlásit se
           </button>
         </div>
 
-        <h1 style={{ fontSize: "42px", fontWeight: 800, marginBottom: "30px" }}>
+        <h1 style={headingStyle}>
           Finance <span style={{ color: "#dc2626" }}>SDH</span>
         </h1>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "18px",
-            marginBottom: "28px",
-          }}
-        >
-          <div style={cardStyle}>
-            <p style={labelStyle}>Příjmy celkem</p>
-            <strong style={{ ...numberStyle, color: "#16a34a" }}>
-              {income.toLocaleString("cs-CZ")} Kč
-            </strong>
-          </div>
-
-          <div style={cardStyle}>
-            <p style={labelStyle}>Výdaje celkem</p>
-            <strong style={{ ...numberStyle, color: "#dc2626" }}>
-              {expenses.toLocaleString("cs-CZ")} Kč
-            </strong>
-          </div>
-
-          <div style={cardStyle}>
-            <p style={labelStyle}>Zůstatek</p>
-            <strong style={numberStyle}>
-              {balance.toLocaleString("cs-CZ")} Kč
-            </strong>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3" style={{ marginBottom: "28px" }}>
+          <SummaryCard label="Příjmy celkem" value={income} color="#16a34a" />
+          <SummaryCard label="Výdaje celkem" value={expenses} color="#dc2626" />
+          <SummaryCard label="Zůstatek" value={balance} color="#111827" />
         </div>
 
         <div style={boxStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "20px" }}>
-            Přidat záznam
-          </h2>
+          <h2 style={subHeadingStyle}>Přidat záznam</h2>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr",
-              gap: "14px",
-              marginBottom: "14px",
-            }}
-          >
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              style={inputStyle}
-            />
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-4" style={{ marginBottom: "14px" }}>
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} style={inputStyle} />
 
-            <select
-              value={type}
-              onChange={(e) => handleTypeChange(e.target.value)}
-              style={inputStyle}
-            >
+            <select value={type} onChange={(e) => handleTypeChange(e.target.value)} style={inputStyle}>
               <option>Příjem</option>
               <option>Výdaj</option>
             </select>
 
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              style={inputStyle}
-            >
+            <select value={category} onChange={(e) => setCategory(e.target.value)} style={inputStyle}>
               {categories.map((cat) => (
                 <option key={cat}>{cat}</option>
               ))}
@@ -264,59 +196,67 @@ export default function FinancePage() {
         </div>
 
         <div style={boxStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "20px" }}>
-            Přehled záznamů
-          </h2>
+          <h2 style={subHeadingStyle}>Přehled záznamů</h2>
 
           {items.length === 0 ? (
-            <p style={{ color: "#6b7280" }}>
-              Zatím nejsou vložené žádné finance.
-            </p>
+            <p style={{ color: "#6b7280" }}>Zatím nejsou vložené žádné finance.</p>
           ) : (
-            items.map((item) => (
-              <div key={item.id} style={rowStyle}>
-                <div>{new Date(item.date).toLocaleDateString("cs-CZ")}</div>
+            <div style={{ display: "grid", gap: "14px" }}>
+              {items.map((item) => (
+                <div key={item.id} style={rowStyle}>
+                  <div>{new Date(item.date).toLocaleDateString("cs-CZ")}</div>
 
-                <div
-                  style={{
-                    color: item.type === "Příjem" ? "#16a34a" : "#dc2626",
-                    fontWeight: 700,
-                  }}
-                >
-                  {item.type}
+                  <div
+                    style={{
+                      color: item.type === "Příjem" ? "#16a34a" : "#dc2626",
+                      fontWeight: 800,
+                    }}
+                  >
+                    {item.type}
+                  </div>
+
+                  <div>
+                    <strong>{item.category}</strong>
+                    {item.note && (
+                      <p style={{ margin: "4px 0 0", color: "#6b7280", fontSize: "14px" }}>
+                        {item.note}
+                      </p>
+                    )}
+                  </div>
+
+                  <div style={{ fontWeight: 900 }}>
+                    {Number(item.amount).toLocaleString("cs-CZ")} Kč
+                  </div>
+
+                  <button onClick={() => deleteFinance(item.id)} style={deleteButtonStyle}>
+                    Smazat
+                  </button>
                 </div>
-
-                <div>
-                  <strong>{item.category}</strong>
-                  {item.note && (
-                    <p
-                      style={{
-                        margin: "4px 0 0",
-                        color: "#6b7280",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {item.note}
-                    </p>
-                  )}
-                </div>
-
-                <div style={{ fontWeight: 800 }}>
-                  {Number(item.amount).toLocaleString("cs-CZ")} Kč
-                </div>
-
-                <button
-                  onClick={() => deleteFinance(item.id)}
-                  style={deleteButtonStyle}
-                >
-                  Smazat
-                </button>
-              </div>
-            ))
+              ))}
+            </div>
           )}
         </div>
       </section>
     </main>
+  );
+}
+
+function SummaryCard({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: number;
+  color: string;
+}) {
+  return (
+    <div style={cardStyle}>
+      <p style={labelStyle}>{label}</p>
+      <strong style={{ ...numberStyle, color }}>
+        {value.toLocaleString("cs-CZ")} Kč
+      </strong>
+    </div>
   );
 }
 
@@ -327,19 +267,47 @@ const backLinkStyle = {
   display: "inline-block",
 };
 
+const logoutButtonStyle = {
+  background: "#dc2626",
+  color: "#fff",
+  border: "none",
+  borderRadius: "14px",
+  padding: "10px 16px",
+  fontSize: "14px",
+  fontWeight: 700,
+  cursor: "pointer",
+  whiteSpace: "nowrap" as const,
+};
+
+const headingStyle = {
+  fontSize: "clamp(42px, 9vw, 48px)",
+  lineHeight: 1.05,
+  fontWeight: 800,
+  marginBottom: "30px",
+  color: "#111827",
+};
+
 const cardStyle = {
   border: "1px solid #ececec",
   borderRadius: "22px",
-  padding: "24px",
+  padding: "22px",
   boxShadow: "0 10px 25px rgba(0,0,0,0.04)",
+  minWidth: 0,
 };
 
 const boxStyle = {
   border: "1px solid #ececec",
   borderRadius: "24px",
-  padding: "28px",
+  padding: "clamp(22px, 5vw, 28px)",
   marginBottom: "28px",
   boxShadow: "0 10px 25px rgba(0,0,0,0.04)",
+};
+
+const subHeadingStyle = {
+  fontSize: "26px",
+  lineHeight: 1.2,
+  fontWeight: 800,
+  marginBottom: "20px",
 };
 
 const labelStyle = {
@@ -349,17 +317,20 @@ const labelStyle = {
 };
 
 const numberStyle = {
-  fontSize: "30px",
+  fontSize: "clamp(26px, 7vw, 30px)",
+  lineHeight: 1.25,
   fontWeight: 900,
-  color: "#111827",
+  wordBreak: "break-word" as const,
 };
 
 const inputStyle = {
   width: "100%",
+  minWidth: 0,
   borderRadius: "14px",
   border: "1px solid #d4d4d4",
   padding: "13px 16px",
   fontSize: "16px",
+  boxSizing: "border-box" as const,
 };
 
 const buttonStyle = {
@@ -384,9 +355,10 @@ const deleteButtonStyle = {
 
 const rowStyle = {
   display: "grid",
-  gridTemplateColumns: "120px 90px 1fr 120px 80px",
-  gap: "14px",
+  gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+  gap: "12px",
   alignItems: "center",
-  padding: "14px 0",
-  borderBottom: "1px solid #f3f4f6",
+  padding: "16px",
+  border: "1px solid #f3f4f6",
+  borderRadius: "18px",
 };

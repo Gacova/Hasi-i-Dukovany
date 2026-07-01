@@ -40,6 +40,13 @@ export default function GaleriePage() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
           <GalleryCard
+            href="/jpo/galerie/doutnajici-strom-loucky"
+            image="/doutnajici-strom-loucky/IMG-20260630-WA0031.jpg"
+            title="Doutnající strom Loučky"
+            text="Fotogalerie z výjezdu jednotky JPO Dukovany k doutnajícímu stromu v lokalitě Loučky."
+          />
+
+          <GalleryCard
             href="/jpo/galerie/skoleni-zdravovedy"
             image="/skoleni-zdravovedy/IMG-20260605-WA0039.jpg"
             title="Školení zdravotní přípravy"
@@ -99,15 +106,16 @@ function GalleryCard({
         }}
       >
         <img
-          src={image}
-          alt={title}
-          style={{
-            width: "100%",
-            height: "260px",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
+  src={image}
+  alt={title}
+  style={{
+    width: "100%",
+    height: "260px",
+    objectFit: "cover",
+    objectPosition: "center 30%",
+    display: "block",
+  }}
+/>
 
         <div
           style={{

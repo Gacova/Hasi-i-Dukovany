@@ -135,14 +135,8 @@ export default function ZapisyPage() {
 
   if (checkingLogin) {
     return (
-      <main
-        style={{
-          background: "#ffffff",
-          minHeight: "100vh",
-          padding: "50px 24px",
-        }}
-      >
-        <section style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <main style={{ background: "#ffffff", minHeight: "100vh" }}>
+        <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "50px 24px" }}>
           <p>Ověřuji přihlášení...</p>
         </section>
       </main>
@@ -150,72 +144,33 @@ export default function ZapisyPage() {
   }
 
   return (
-    <main
-      style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        padding: "50px 24px",
-      }}
-    >
-      <section style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
+      <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "34px 24px 70px" }}>
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "24px",
+            gap: "16px",
+            marginBottom: "28px",
           }}
         >
-          <a
-            href="/admin"
-            style={{
-              color: "#b91c1c",
-              textDecoration: "none",
-              fontWeight: 700,
-            }}
-          >
+          <a href="/admin" style={backLinkStyle}>
             ← Zpět do administrace
           </a>
 
-          <button
-            onClick={handleLogout}
-            style={{
-              background: "#dc2626",
-              color: "#fff",
-              border: "none",
-              borderRadius: "14px",
-              padding: "10px 16px",
-              fontSize: "14px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
+          <button onClick={handleLogout} style={logoutButtonStyle}>
             Odhlásit se
           </button>
         </div>
 
-        <h1
-          style={{
-            fontSize: "42px",
-            fontWeight: 800,
-            marginTop: "24px",
-            marginBottom: "30px",
-          }}
-        >
-          📝 Zápisy z výboru
-        </h1>
+        <h1 style={headingStyle}>📝 Zápisy z výboru</h1>
 
         <div style={boxStyle}>
           <h2 style={titleStyle}>Přidat zápis</h2>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: "14px",
-              marginBottom: "14px",
-            }}
-          >
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3" style={{ marginBottom: "14px" }}>
             <input
               type="date"
               value={meetingDate}
@@ -261,36 +216,30 @@ export default function ZapisyPage() {
             <div key={year} style={boxStyle}>
               <h2 style={titleStyle}>{year}</h2>
 
-              {items
-                .filter((item) => item.year === year)
-                .map((item) => (
-                  <div key={item.id} style={rowStyle}>
-                    <div>
-                      <strong>{item.title}</strong>
-                      <p style={{ margin: "6px 0 0", color: "#6b7280" }}>
-                        {new Date(item.meeting_date).toLocaleDateString(
-                          "cs-CZ"
-                        )}
-                      </p>
-                    </div>
+              <div style={{ display: "grid", gap: "14px" }}>
+                {items
+                  .filter((item) => item.year === year)
+                  .map((item) => (
+                    <div key={item.id} style={rowStyle}>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <p style={{ margin: "6px 0 0", color: "#6b7280" }}>
+                          {new Date(item.meeting_date).toLocaleDateString("cs-CZ")}
+                        </p>
+                      </div>
 
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <button
-                        onClick={() => openFile(item)}
-                        style={openButtonStyle}
-                      >
-                        Otevřít
-                      </button>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                        <button onClick={() => openFile(item)} style={openButtonStyle}>
+                          Otevřít
+                        </button>
 
-                      <button
-                        onClick={() => deleteFile(item)}
-                        style={deleteButtonStyle}
-                      >
-                        Smazat
-                      </button>
+                        <button onClick={() => deleteFile(item)} style={deleteButtonStyle}>
+                          Smazat
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           ))
         )}
@@ -299,26 +248,56 @@ export default function ZapisyPage() {
   );
 }
 
+const backLinkStyle = {
+  color: "#b91c1c",
+  textDecoration: "none",
+  fontWeight: 700,
+};
+
+const logoutButtonStyle = {
+  background: "#dc2626",
+  color: "#fff",
+  border: "none",
+  borderRadius: "14px",
+  padding: "10px 16px",
+  fontSize: "14px",
+  fontWeight: 700,
+  cursor: "pointer",
+  whiteSpace: "nowrap" as const,
+};
+
+const headingStyle = {
+  fontSize: "clamp(38px, 9vw, 42px)",
+  lineHeight: 1.1,
+  fontWeight: 800,
+  marginTop: "24px",
+  marginBottom: "30px",
+  color: "#111827",
+};
+
 const boxStyle = {
   border: "1px solid #ececec",
   borderRadius: "24px",
-  padding: "28px",
+  padding: "clamp(22px, 5vw, 28px)",
   marginBottom: "28px",
   boxShadow: "0 10px 25px rgba(0,0,0,0.04)",
 };
 
 const titleStyle = {
-  fontSize: "24px",
+  fontSize: "26px",
+  lineHeight: 1.2,
   fontWeight: 800,
   marginBottom: "20px",
 };
 
 const inputStyle = {
   width: "100%",
+  minWidth: 0,
   borderRadius: "14px",
   border: "1px solid #d4d4d4",
   padding: "13px 16px",
   fontSize: "16px",
+  boxSizing: "border-box" as const,
 };
 
 const buttonStyle = {
@@ -335,10 +314,13 @@ const buttonStyle = {
 
 const rowStyle = {
   display: "flex",
+  flexWrap: "wrap" as const,
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "16px 0",
-  borderBottom: "1px solid #f3f4f6",
+  gap: "14px",
+  padding: "16px",
+  border: "1px solid #f3f4f6",
+  borderRadius: "18px",
 };
 
 const openButtonStyle = {
@@ -347,7 +329,6 @@ const openButtonStyle = {
   padding: "8px 14px",
   background: "#dc2626",
   color: "#ffffff",
-  textDecoration: "none",
   fontWeight: 700,
   cursor: "pointer",
 };
