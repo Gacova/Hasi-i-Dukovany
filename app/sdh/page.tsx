@@ -1,3 +1,8 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SDH Dukovany",
+};
 import Image from "next/image";
 
 export default function SDHPage() {
