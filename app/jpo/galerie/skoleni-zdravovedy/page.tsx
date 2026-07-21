@@ -1,16 +1,22 @@
+import Image from "next/image";
 import BackLink from "@/components/BackLink";
 
 export default function SkoleniZdravovedyPage() {
-  const galleryImages = [
-    "/skoleni-zdravovedy/IMG-20260605-WA0039.jpg",
-    "/skoleni-zdravovedy/IMG-20260605-WA0040.jpg",
-    "/skoleni-zdravovedy/IMG-20260605-WA0041.jpg",
-    "/skoleni-zdravovedy/IMG-20260605-WA0042.jpg",
-  ];
-
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "34px 24px 70px",
+        }}
+      >
         <BackLink href="/jpo/galerie">Zpět do galerie</BackLink>
 
         <section
@@ -72,22 +78,55 @@ export default function SkoleniZdravovedyPage() {
               🚑
             </div>
 
-            <h2 style={{ margin: 0, fontSize: "22px", fontWeight: 800, lineHeight: 1.35 }}>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: "22px",
+                fontWeight: 800,
+                lineHeight: 1.35,
+              }}
+            >
               Odborná příprava členů JPO
             </h2>
 
-            <p style={{ marginTop: "22px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
+            <p
+              style={{
+                marginTop: "22px",
+                fontSize: "16px",
+                lineHeight: 1.7,
+                color: "#374151",
+              }}
+            >
               Pravidelné vzdělávání pomáhá členům jednotky udržovat znalosti a
               připravenost pro zásahy i mimořádné události.
             </p>
           </div>
 
-          <div style={{ border: "1px solid #ececec", borderRadius: "28px", overflow: "hidden", background: "#ffffff" }}>
+          <div
+            style={{
+              border: "1px solid #ececec",
+              borderRadius: "28px",
+              overflow: "hidden",
+              background: "#ffffff",
+            }}
+          >
             {[
-              ["🩺", "Členové jednotky absolvovali školení zdravotní přípravy zaměřené na poskytování první pomoci."],
-              ["🚨", "Součástí byla praktická cvičení a řešení situací, se kterými se mohou setkat během zásahů."],
-              ["📚", "Procvičeny byly základní postupy první pomoci a správné vyhodnocení zdravotního stavu postiženého."],
-              ["🤝", "Pravidelné školení pomáhá udržovat připravenost jednotky k pomoci občanům v případě potřeby."],
+              [
+                "🩺",
+                "Členové jednotky absolvovali školení zdravotní přípravy zaměřené na poskytování první pomoci.",
+              ],
+              [
+                "🚨",
+                "Součástí byla praktická cvičení a řešení situací, se kterými se mohou setkat během zásahů.",
+              ],
+              [
+                "📚",
+                "Procvičeny byly základní postupy první pomoci a správné vyhodnocení zdravotního stavu postiženého.",
+              ],
+              [
+                "🤝",
+                "Pravidelné školení pomáhá udržovat připravenost jednotky k pomoci občanům v případě potřeby.",
+              ],
             ].map(([icon, text], index) => (
               <div
                 key={index}
@@ -96,7 +135,8 @@ export default function SkoleniZdravovedyPage() {
                   gap: "16px",
                   padding: "22px",
                   alignItems: "center",
-                  borderBottom: index === 3 ? "none" : "1px solid #f3f4f6",
+                  borderBottom:
+                    index === 3 ? "none" : "1px solid #f3f4f6",
                 }}
               >
                 <div
@@ -115,7 +155,13 @@ export default function SkoleniZdravovedyPage() {
                   {icon}
                 </div>
 
-                <p style={{ margin: 0, fontSize: "16px", lineHeight: 1.65 }}>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "16px",
+                    lineHeight: 1.65,
+                  }}
+                >
                   {text}
                 </p>
               </div>
@@ -125,25 +171,25 @@ export default function SkoleniZdravovedyPage() {
           <div>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-                gap: "14px",
+                position: "relative",
+                width: "100%",
+                height: "clamp(260px, 45vw, 430px)",
+                borderRadius: "28px",
+                overflow: "hidden",
+                background: "#f3f4f6",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
               }}
             >
-              {galleryImages.map((image, index) => (
-                <img
-                  key={image}
-                  src={image}
-                  alt={`Školení ${index + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "clamp(150px, 42vw, 190px)",
-                    objectFit: "cover",
-                    borderRadius: "22px",
-                    display: "block",
-                  }}
-                />
-              ))}
+              <Image
+                src="/skoleni-zdravovedy/IMG-20260605-WA0039.jpg"
+                alt="Školení zdravotní přípravy"
+                fill
+                quality={75}
+                sizes="(max-width: 768px) 100vw, 500px"
+                style={{
+                  objectFit: "cover",
+                }}
+              />
             </div>
 
             <a
@@ -158,7 +204,7 @@ export default function SkoleniZdravovedyPage() {
                 textAlign: "right",
               }}
             >
-              Zobrazit celou galerii →
+              Zobrazit galerii →
             </a>
           </div>
         </section>

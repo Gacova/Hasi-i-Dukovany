@@ -30,7 +30,13 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <main style={{ padding: "60px 24px", background: "#fff", minHeight: "100vh" }}>
+      <main
+        style={{
+          padding: "60px 24px",
+          background: "#fff",
+          minHeight: "100vh",
+        }}
+      >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <p>Ověřuji přihlášení...</p>
         </div>
@@ -40,7 +46,13 @@ export default function AdminPage() {
 
   return (
     <main style={{ background: "#fff", minHeight: "100vh" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 24px 80px" }}>
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "40px 24px 80px",
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -64,7 +76,13 @@ export default function AdminPage() {
               Administrace
             </h1>
 
-            <p style={{ color: "#6b7280", fontSize: "18px", marginTop: "14px" }}>
+            <p
+              style={{
+                color: "#6b7280",
+                fontSize: "18px",
+                marginTop: "14px",
+              }}
+            >
               Vyber sekci, kterou chceš spravovat.
             </p>
           </div>
@@ -92,7 +110,7 @@ export default function AdminPage() {
             href="/admin/clenove"
             icon="👥"
             title="Správa členů"
-            text="Přidávání, úprava a mazání členů SDH."
+            text="Přidávání, úprava a mazání členů SDH a JPO."
           />
 
           <AdminCard
@@ -115,6 +133,14 @@ export default function AdminPage() {
             title="Výjezdy JPO"
             text="Přidávání a správa výjezdů jednotky."
           />
+
+          <AdminCard
+            href="/admin/ukoly"
+            icon="📋"
+            title="Úkoly"
+            text="Správa ticketů, priorit, termínů, komentářů a příloh."
+            highlighted
+          />
         </div>
       </div>
     </main>
@@ -126,23 +152,41 @@ function AdminCard({
   icon,
   title,
   text,
+  highlighted = false,
 }: {
   href: string;
   icon: string;
   title: string;
   text: string;
+  highlighted?: boolean;
 }) {
   return (
     <a href={href} style={{ textDecoration: "none", color: "inherit" }}>
       <article
         style={{
-          border: "1px solid #ececec",
+          border: highlighted ? "2px solid #dc2626" : "1px solid #ececec",
           borderRadius: "24px",
           padding: "28px",
           minHeight: "220px",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+          boxShadow: highlighted
+            ? "0 14px 35px rgba(220,38,38,0.14)"
+            : "0 10px 30px rgba(0,0,0,0.05)",
           display: "flex",
           flexDirection: "column",
+          background: highlighted ? "#fffafa" : "#ffffff",
+          transition: "transform 0.2s ease, box-shadow 0.2s ease",
+        }}
+        onMouseEnter={(event) => {
+          event.currentTarget.style.transform = "translateY(-4px)";
+          event.currentTarget.style.boxShadow = highlighted
+            ? "0 18px 40px rgba(220,38,38,0.2)"
+            : "0 16px 36px rgba(0,0,0,0.1)";
+        }}
+        onMouseLeave={(event) => {
+          event.currentTarget.style.transform = "translateY(0)";
+          event.currentTarget.style.boxShadow = highlighted
+            ? "0 14px 35px rgba(220,38,38,0.14)"
+            : "0 10px 30px rgba(0,0,0,0.05)";
         }}
       >
         <div style={{ fontSize: "44px" }}>{icon}</div>
@@ -154,12 +198,19 @@ function AdminCard({
             fontSize: "26px",
             lineHeight: 1.2,
             fontWeight: 800,
+            color: highlighted ? "#dc2626" : "#111827",
           }}
         >
           {title}
         </h2>
 
-        <p style={{ color: "#6b7280", lineHeight: 1.6, margin: 0 }}>
+        <p
+          style={{
+            color: "#6b7280",
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
           {text}
         </p>
       </article>

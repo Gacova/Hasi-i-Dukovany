@@ -1,3 +1,4 @@
+import Image from "next/image";
 import BackLink from "@/components/BackLink";
 
 export default function GaleriePage() {
@@ -62,13 +63,14 @@ export default function GaleriePage() {
 
           <GalleryCard
             href="/jpo/galerie/paleni-carodejnic"
-image="/paleni-carodejnic/uvodni.JPG"            title="Pálení čarodějnic"
+            image="/paleni-carodejnic/uvodni.JPG"
+            title="Pálení čarodějnic"
             text="Jednotka JPO Dukovany během akce zajišťovala požární dohled nad vatrou a po skončení provedla bezpečné dohašení."
           />
 
           <GalleryCard
             href="/jpo/galerie/preventivne-vychovna-cinnost-ms"
-            image="/jpo_skolka/hlavni.jpg"
+            image="/jpo_skolka/IMG-20260616-WA0017.jpg"
             title="Preventivně výchovná činnost pro děti z MŠ"
             text="Děti z Mateřské školy Dukovany navštívily hasičskou zbrojnici, kde se seznámily s činností jednotky, technikou a zásadami bezpečného chování."
           />
@@ -104,17 +106,27 @@ function GalleryCard({
           flexDirection: "column",
         }}
       >
-        <img
-  src={image}
-  alt={title}
-  style={{
-    width: "100%",
-    height: "260px",
-    objectFit: "cover",
-    objectPosition: "center 30%",
-    display: "block",
-  }}
-/>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "260px",
+            background: "#f3f4f6",
+          }}
+        >
+          <Image
+            src={image}
+            alt={title}
+            fill
+            loading="lazy"
+            quality={65}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center 30%",
+            }}
+          />
+        </div>
 
         <div
           style={{

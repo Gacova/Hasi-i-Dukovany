@@ -7,7 +7,6 @@ import { useState } from "react";
 const sdhMenu = [
   { label: "Domů", href: "/sdh" },
   { label: "Výbor", href: "/sdh/vybor" },
-  { label: "Členové", href: "/sdh/clenove" },
   { label: "Tréninky", href: "/sdh/treninky" },
   { label: "Akce", href: "/sdh/akce" },
   { label: "Tábor", href: "/sdh/tabor" },
@@ -29,17 +28,21 @@ export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  if (pathname === "/") {
+    return null;
+  }
+
   const menu = pathname.startsWith("/jpo") ? jpoMenu : sdhMenu;
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <Link
-  href="/"
-  className="text-2xl font-bold tracking-tight text-neutral-900"
->
-  <span className="text-red-700">Hasiči</span> Dukovany
-</Link>
+          href="/"
+          className="text-2xl font-bold tracking-tight text-neutral-900"
+        >
+          <span className="text-red-700">Hasiči</span> Dukovany
+        </Link>
 
         {/* Desktop */}
         <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
@@ -62,6 +65,7 @@ export default function Header() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-2xl shadow-sm transition hover:bg-neutral-100 md:hidden"
+          aria-label="Otevřít menu"
         >
           {isOpen ? "✕" : "☰"}
         </button>

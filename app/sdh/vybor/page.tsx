@@ -2,13 +2,50 @@ import BackLink from "@/components/BackLink";
 
 export default function VyborPage() {
   const committeeMembers = [
-    { name: "Marcela Vrbková", role: "Starostka SDH", email: "mail", image: "/20260531_103645.jpg" },
-    { name: "Jan Vrbka", role: "1. náměstek starostky", email: "mail", image: "/20260531_103736.jpg" },
-    { name: "Bc. Pavel Stuchlík, DiS.", role: "Velitel JPO", email: "mail", image: "/pavel.jpg" },
-    { name: "Ing. Lukáš Seidl", role: "Hospodář", email: "mail" },
-    { name: "Kristýna Gacova", role: "Vedoucí mládeže", email: "gacova@centrum.cz", image: "/gacova.jpg" },
-    { name: "Vladimír Troščák", role: "Člen výboru", email: "mail", image: "/IMG-20260531-WA0010.jpg" },
-    { name: "Tomáš Vorel", role: "Člen výboru", email: "mail", image: "/20260531_171357.jpg" },
+    {
+      name: "Marcela Vrbková",
+      role: "Starostka SDH",
+      emails: ["sdhdukovany@seznam.cz"],
+      image: "/20260531_103645.jpg",
+    },
+    {
+      name: "Jan Vrbka",
+      role: "1. náměstek starostky",
+      emails: ["sdhdukovany@seznam.cz"],
+      image: "/20260531_103736.jpg",
+    },
+    {
+      name: "Bc. Pavel Stuchlík, DiS.",
+      role: "Velitel JPO",
+      emails: [
+        "sdhdukovany@seznam.cz",
+        "hasici@obecdukovany.cz",
+      ],
+      image: "/pavel.jpg",
+    },
+    {
+      name: "Ing. Lukáš Seidl",
+      role: "Hospodář",
+      emails: ["sdhdukovany@seznam.cz"],
+    },
+    {
+      name: "Kristýna Gacova",
+      role: "Vedoucí mládeže",
+      emails: ["sdhdukovany@seznam.cz"],
+      image: "/gacova.jpg",
+    },
+    {
+      name: "Vladimír Troščák",
+      role: "Člen výboru",
+      emails: ["sdhdukovany@seznam.cz"],
+      image: "/IMG-20260531-WA0010.jpg",
+    },
+    {
+      name: "Tomáš Vorel",
+      role: "Člen výboru",
+      emails: ["sdhdukovany@seznam.cz"],
+      image: "/20260531_171357.jpg",
+    },
   ];
 
   return (
@@ -103,22 +140,31 @@ export default function VyborPage() {
                   {member.name}
                 </h2>
 
-                <p style={{ marginTop: "10px", fontSize: "16px", color: "#6b7280" }}>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    fontSize: "16px",
+                    color: "#6b7280",
+                  }}
+                >
                   {member.role}
                 </p>
 
-                {member.email !== "mail" && (
-                  <p
-                    style={{
-                      marginTop: "14px",
-                      fontSize: "15px",
-                      color: "#dc2626",
-                      wordBreak: "break-word",
-                    }}
-                  >
-                    {member.email}
-                  </p>
-                )}
+                <div style={{ marginTop: "14px" }}>
+                  {member.emails.map((email) => (
+                    <p
+                      key={email}
+                      style={{
+                        margin: "4px 0",
+                        fontSize: "15px",
+                        color: "#dc2626",
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {email}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

@@ -1,16 +1,22 @@
+import Image from "next/image";
 import BackLink from "@/components/BackLink";
 
 export default function UklidZbrojnicePage() {
-  const galleryImages = [
-    "/uklid-zbrojnice/20260606_091314.jpg",
-    "/uklid-zbrojnice/IMG-20260606-WA0031.jpg",
-    "/uklid-zbrojnice/IMG-20260606-WA0032.jpg",
-    "/uklid-zbrojnice/IMG-20260606-WA0033.jpg",
-  ];
-
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "34px 24px 70px",
+        }}
+      >
         <BackLink href="/jpo/galerie">Zpět do galerie</BackLink>
 
         <section
@@ -24,17 +30,17 @@ export default function UklidZbrojnicePage() {
           }}
         >
           <h1
-  style={{
-    margin: 0,
-    fontSize: "clamp(42px, 9vw, 56px)",
-    lineHeight: 1.05,
-    fontWeight: 800,
-    letterSpacing: "-1.5px",
-    color: "#111827",
-  }}
->
-  Úklid zbrojnice a techniky
-</h1>
+            style={{
+              margin: 0,
+              fontSize: "clamp(42px, 9vw, 56px)",
+              lineHeight: 1.05,
+              fontWeight: 800,
+              letterSpacing: "-1.5px",
+              color: "#111827",
+            }}
+          >
+            Úklid zbrojnice a techniky
+          </h1>
         </section>
 
         <section
@@ -129,7 +135,8 @@ export default function UklidZbrojnicePage() {
                   gap: "16px",
                   padding: "22px",
                   alignItems: "center",
-                  borderBottom: index === 3 ? "none" : "1px solid #f3f4f6",
+                  borderBottom:
+                    index === 3 ? "none" : "1px solid #f3f4f6",
                 }}
               >
                 <div
@@ -164,25 +171,25 @@ export default function UklidZbrojnicePage() {
           <div>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-                gap: "14px",
+                position: "relative",
+                width: "100%",
+                height: "clamp(260px, 45vw, 430px)",
+                borderRadius: "28px",
+                overflow: "hidden",
+                background: "#f3f4f6",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
               }}
             >
-              {galleryImages.map((image, index) => (
-                <img
-                  key={image}
-                  src={image}
-                  alt={`Úklid ${index + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "clamp(150px, 42vw, 190px)",
-                    objectFit: "cover",
-                    borderRadius: "22px",
-                    display: "block",
-                  }}
-                />
-              ))}
+              <Image
+                src="/uklid-zbrojnice/20260606_091314.jpg"
+                alt="Úklid zbrojnice a techniky"
+                fill
+                quality={75}
+                sizes="(max-width: 768px) 100vw, 500px"
+                style={{
+                  objectFit: "cover",
+                }}
+              />
             </div>
 
             <a
@@ -197,7 +204,7 @@ export default function UklidZbrojnicePage() {
                 textAlign: "right",
               }}
             >
-              Zobrazit celou galerii →
+              Zobrazit galerii →
             </a>
           </div>
         </section>

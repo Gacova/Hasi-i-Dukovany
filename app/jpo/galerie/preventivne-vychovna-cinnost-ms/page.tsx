@@ -1,16 +1,22 @@
+import Image from "next/image";
 import BackLink from "@/components/BackLink";
 
 export default function SkolkaPage() {
-  const galleryImages = [
-    "/jpo_skolka/hlavni.jpg",
-    "/jpo_skolka/IMG-20260616-WA0007.jpg",
-    "/jpo_skolka/IMG-20260616-WA0008.jpg",
-    "/jpo_skolka/IMG-20260616-WA0009.jpg",
-  ];
-
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "34px 24px 70px" }}>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "34px 24px 70px",
+        }}
+      >
         <BackLink href="/jpo/galerie">Zpět do galerie</BackLink>
 
         <section
@@ -43,6 +49,7 @@ export default function SkolkaPage() {
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "22px",
             marginTop: "28px",
+            alignItems: "stretch",
           }}
         >
           <div
@@ -71,11 +78,25 @@ export default function SkolkaPage() {
               👧
             </div>
 
-            <h2 style={{ margin: 0, fontSize: "22px", fontWeight: 800, lineHeight: 1.35 }}>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: "22px",
+                fontWeight: 800,
+                lineHeight: 1.35,
+              }}
+            >
               Návštěva mateřské školy
             </h2>
 
-            <p style={{ marginTop: "22px", fontSize: "16px", lineHeight: 1.7, color: "#374151" }}>
+            <p
+              style={{
+                marginTop: "22px",
+                fontSize: "16px",
+                lineHeight: 1.7,
+                color: "#374151",
+              }}
+            >
               Děti z Mateřské školy Dukovany navštívily hasičskou zbrojnici a
               seznámily se s prací hasičů i vybavením jednotky.
             </p>
@@ -90,10 +111,22 @@ export default function SkolkaPage() {
             }}
           >
             {[
-              ["🚒", "Děti si prohlédly zásahové vozidlo a hasičskou techniku používanou při výjezdech."],
-              ["🧯", "Seznámily se s vybavením jednotky a jeho využitím při zásazích."],
-              ["📞", "Součástí programu bylo povídání o bezpečném chování a přivolání pomoci."],
-              ["😊", "Děti měly možnost klást otázky a zblízka si prohlédnout prostory zbrojnice."],
+              [
+                "🚒",
+                "Děti si prohlédly zásahové vozidlo a hasičskou techniku používanou při výjezdech.",
+              ],
+              [
+                "🧯",
+                "Seznámily se s vybavením jednotky a jeho využitím při zásazích.",
+              ],
+              [
+                "📞",
+                "Součástí programu bylo povídání o bezpečném chování a přivolání pomoci.",
+              ],
+              [
+                "😊",
+                "Děti měly možnost klást otázky a zblízka si prohlédnout prostory zbrojnice.",
+              ],
             ].map(([icon, text], index) => (
               <div
                 key={index}
@@ -102,7 +135,8 @@ export default function SkolkaPage() {
                   gap: "16px",
                   padding: "22px",
                   alignItems: "center",
-                  borderBottom: index === 3 ? "none" : "1px solid #f3f4f6",
+                  borderBottom:
+                    index === 3 ? "none" : "1px solid #f3f4f6",
                 }}
               >
                 <div
@@ -121,7 +155,13 @@ export default function SkolkaPage() {
                   {icon}
                 </div>
 
-                <p style={{ margin: 0, fontSize: "16px", lineHeight: 1.65 }}>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "16px",
+                    lineHeight: 1.65,
+                  }}
+                >
                   {text}
                 </p>
               </div>
@@ -131,25 +171,25 @@ export default function SkolkaPage() {
           <div>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-                gap: "14px",
+                position: "relative",
+                width: "100%",
+                height: "clamp(260px, 45vw, 430px)",
+                borderRadius: "28px",
+                overflow: "hidden",
+                background: "#f3f4f6",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
               }}
             >
-              {galleryImages.map((image, index) => (
-                <img
-                  key={image}
-                  src={image}
-                  alt={`MŠ ${index + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "clamp(150px, 42vw, 190px)",
-                    objectFit: "cover",
-                    borderRadius: "22px",
-                    display: "block",
-                  }}
-                />
-              ))}
+              <Image
+                src="/jpo_skolka/IMG-20260616-WA0017.jpg"
+                alt="Preventivně výchovná činnost pro děti z MŠ Dukovany"
+                fill
+                quality={75}
+                sizes="(max-width: 768px) 100vw, 500px"
+                style={{
+                  objectFit: "cover",
+                }}
+              />
             </div>
 
             <a
@@ -164,7 +204,7 @@ export default function SkolkaPage() {
                 textAlign: "right",
               }}
             >
-              Zobrazit celou galerii →
+              Zobrazit galerii →
             </a>
           </div>
         </section>

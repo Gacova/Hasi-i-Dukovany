@@ -6,40 +6,89 @@ import BackLink from "@/components/BackLink";
 
 type Member = {
   id: string;
-  name: string;
-  role: string;
   group: string;
   section: string;
 };
 
 export default function ClenovePage() {
   const [members, setMembers] = useState<Member[]>([]);
-  const [activeGroup, setActiveGroup] = useState("Muži");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadMembers();
   }, []);
 
   async function loadMembers() {
+    setLoading(true);
+
     const { data, error } = await supabase
       .from("members")
-      .select("*")
-      .eq("section", "SDH")
-      .order("created_at", { ascending: true });
+      .select("id, group, section")
+      .eq("section", "SDH");
 
     if (error) {
-      console.error(error);
+      console.error("Chyba při načítání členů:", error);
+      setLoading(false);
       return;
     }
 
     setMembers(data || []);
+    setLoading(false);
   }
 
-  const groups = ["Muži", "Ženy", "Mládež"];
-  const filteredMembers = members.filter((member) => member.group === activeGroup);
+  const totalCount = members.length;
+
+  const menCount = members.filter(
+    (member) => member.group === "Muži"
+  ).length;
+
+  const womenCount = members.filter(
+    (member) => member.group === "Ženy"
+  ).length;
+
+  const youthCount = members.filter(
+    (member) => member.group === "Mládež"
+  ).length;
+
+  const statistics = [
+    {
+      title: "Celkem členů",
+      count: totalCount,
+      description: "Celkový počet členů SDH Dukovany",
+      background: "#fff7f7",
+      color: "#dc2626",
+    },
+    {
+      title: "Muži",
+      count: menCount,
+      description: "Počet mužů ve sboru",
+      background: "#f3f4f6",
+      color: "#111827",
+    },
+    {
+      title: "Ženy",
+      count: womenCount,
+      description: "Počet žen ve sboru",
+      background: "#f3f4f6",
+      color: "#111827",
+    },
+    {
+      title: "Mladí hasiči",
+      count: youthCount,
+      description: "Počet členů mládeže",
+      background: "#f3f4f6",
+      color: "#111827",
+    },
+  ];
 
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh", padding: "34px 24px 70px" }}>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        padding: "34px 24px 70px",
+      }}
+    >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <BackLink href="/sdh">Zpět na SDH</BackLink>
 
@@ -62,136 +111,93 @@ export default function ClenovePage() {
             fontSize: "clamp(17px, 4vw, 22px)",
             lineHeight: 1.7,
             maxWidth: "850px",
-            marginBottom: "34px",
+            marginBottom: "42px",
             color: "#111827",
           }}
         >
-          Náš sbor tvoří dospělí členové, ženy i mladí hasiči. Společně
-          trénujeme, pomáháme při akcích a vytváříme komunitu, která drží při
-          sobě.
+          SDH Dukovany tvoří dospělí členové i mladí hasiči. Z důvodu ochrany
+          soukromí zde zveřejňujeme pouze celkové počty členů jednotlivých
+          skupin.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(135px, 1fr))",
-            gap: "12px",
-            marginBottom: "32px",
-            maxWidth: "620px",
-          }}
-        >
-          {groups.map((group) => {
-            const count = members.filter((m) => m.group === group).length;
-            const isActive = activeGroup === group;
-
-            return (
-              <button
-                key={group}
-                onClick={() => setActiveGroup(group)}
-                style={{
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "999px",
-                  padding: "14px 18px",
-                  fontSize: "clamp(16px, 4vw, 20px)",
-                  fontWeight: 800,
-                  cursor: "pointer",
-                  background: isActive ? "#dc2626" : "#ffffff",
-                  color: isActive ? "#ffffff" : "#111827",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {group} ({count})
-              </button>
-            );
-          })}
-        </div>
-
-        <section
-          style={{
-            border: "1px solid #ececec",
-            borderRadius: "28px",
-            overflow: "hidden",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
-            background: "#ffffff",
-          }}
-        >
+        {loading ? (
           <div
             style={{
-              background: "#fff7f7",
-              padding: "24px",
-              borderBottom: "1px solid #f3f4f6",
+              border: "1px solid #ececec",
+              borderRadius: "28px",
+              padding: "40px 24px",
+              textAlign: "center",
+              color: "#6b7280",
+              fontSize: "18px",
+              background: "#ffffff",
+              boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
             }}
           >
-            <h2
-              style={{
-                margin: 0,
-                fontSize: "clamp(28px, 7vw, 34px)",
-                fontWeight: 800,
-                color: "#dc2626",
-              }}
-            >
-              {activeGroup}
-            </h2>
+            Načítám počet členů...
           </div>
-
-          {filteredMembers.length === 0 ? (
-            <div style={{ padding: "28px", color: "#6b7280", fontSize: "16px" }}>
-              V této skupině zatím nejsou žádní členové.
-            </div>
-          ) : (
-            filteredMembers.map((member, index) => (
+        ) : (
+          <section
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(auto-fit, minmax(min(100%, 230px), 1fr))",
+              gap: "22px",
+            }}
+          >
+            {statistics.map((item) => (
               <div
-                key={member.id}
+                key={item.title}
                 style={{
+                  border: "1px solid #ececec",
+                  borderRadius: "28px",
+                  padding: "30px 26px",
+                  background: item.background,
+                  boxShadow: "0 12px 30px rgba(0,0,0,0.05)",
+                  minHeight: "210px",
                   display: "flex",
-                  alignItems: "center",
-                  gap: "18px",
-                  padding: "22px 24px",
-                  borderBottom:
-                    index === filteredMembers.length - 1 ? "none" : "1px solid #f3f4f6",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
                 }}
               >
-                <div
+                <h2
                   style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "999px",
-                    background: "#fff1f2",
-                    color: "#dc2626",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    margin: 0,
+                    fontSize: "clamp(22px, 5vw, 28px)",
                     fontWeight: 800,
-                    flexShrink: 0,
+                    color: item.color,
                   }}
                 >
-                  {index + 1}
-                </div>
+                  {item.title}
+                </h2>
 
-                <div style={{ minWidth: 0 }}>
-                  <h3
+                <div>
+                  <div
                     style={{
-                      margin: 0,
-                      fontSize: "clamp(18px, 5vw, 22px)",
-                      fontWeight: 800,
-                      lineHeight: 1.3,
-                      color: "#111827",
+                      fontSize: "clamp(58px, 12vw, 82px)",
+                      lineHeight: 1,
+                      fontWeight: 900,
+                      color: item.color,
+                      marginBottom: "16px",
                     }}
                   >
-                    {member.name}
-                  </h3>
+                    {item.count}
+                  </div>
 
-                  {member.role && (
-                    <p style={{ marginTop: "6px", color: "#6b7280", fontSize: "15px" }}>
-                      {member.role}
-                    </p>
-                  )}
+                  <p
+                    style={{
+                      margin: 0,
+                      color: "#6b7280",
+                      fontSize: "16px",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {item.description}
+                  </p>
                 </div>
               </div>
-            ))
-          )}
-        </section>
+            ))}
+          </section>
+        )}
       </div>
     </main>
   );

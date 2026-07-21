@@ -1,23 +1,59 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "SDH Dukovany",
 };
-import Image from "next/image";
 
 export default function SDHPage() {
   const tiles = [
-    { title: "Výbor", text: "Přehled členů výboru SDH a jejich funkcí.", href: "/sdh/vybor" },
-    { title: "Členové", text: "Přehled členů sboru a mladých hasičů.", href: "/sdh/clenove" },
-    { title: "Tréninky", text: "Pravidelné tréninky a důležité informace.", href: "/sdh/treninky" },
-    { title: "Akce", text: "Soutěže, společné akce a další dění.", href: "/sdh/akce" },
-    { title: "Tábor", text: "Letní tábor a informace pro děti i rodiče.", href: "/sdh/tabor" },
-    { title: "Galerie", text: "Fotky z tréninků, akcí a společných setkání.", href: "/sdh/galerie" },
+    {
+      title: "Výbor",
+      text: "Přehled členů výboru SDH a jejich funkcí.",
+      href: "/sdh/vybor",
+    },
+    {
+      title: "Členové",
+      text: "Přehled celkového počtu mužů, žen a mladých hasičů.",
+      href: "/sdh/clenove",
+    },
+    {
+      title: "Tréninky",
+      text: "Pravidelné tréninky a důležité informace.",
+      href: "/sdh/treninky",
+    },
+    {
+      title: "Akce",
+      text: "Soutěže, společné akce a další dění.",
+      href: "/sdh/akce",
+    },
+    {
+      title: "Tábor",
+      text: "Letní tábor a informace pro děti i rodiče.",
+      href: "/sdh/tabor",
+    },
+    {
+      title: "Galerie",
+      text: "Fotky z tréninků, akcí a společných setkání.",
+      href: "/sdh/galerie",
+    },
   ];
 
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111827" }}>
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "36px 24px 70px" }}>
+    <main
+      style={{
+        background: "#ffffff",
+        minHeight: "100vh",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "36px 24px 70px",
+        }}
+      >
         <a
           href="/"
           style={{
@@ -126,7 +162,10 @@ export default function SDHPage() {
             <a
               key={tile.title}
               href={tile.href}
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
             >
               <article
                 style={{
@@ -140,7 +179,13 @@ export default function SDHPage() {
                   flexDirection: "column",
                 }}
               >
-                <h2 style={{ margin: 0, fontSize: "28px", fontWeight: 800 }}>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: "28px",
+                    fontWeight: 800,
+                  }}
+                >
                   {tile.title}
                 </h2>
 
