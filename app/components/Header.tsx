@@ -7,6 +7,7 @@ import { useState } from "react";
 const sdhMenu = [
   { label: "Domů", href: "/sdh" },
   { label: "Výbor", href: "/sdh/vybor" },
+  { label: "Členové", href: "/sdh/clenove" },
   { label: "Tréninky", href: "/sdh/treninky" },
   { label: "Akce", href: "/sdh/akce" },
   { label: "Tábor", href: "/sdh/tabor" },
@@ -93,6 +94,7 @@ export default function Header() {
           onClick={() => setIsOpen(!isOpen)}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-2xl shadow-sm transition hover:bg-neutral-100 md:hidden"
           aria-label="Otevřít menu"
+          aria-expanded={isOpen}
         >
           {isOpen ? "✕" : "☰"}
         </button>
