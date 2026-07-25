@@ -141,6 +141,12 @@ export default function AdminPage() {
             text="Správa ticketů, priorit, termínů, komentářů a příloh."
             highlighted
           />
+          <AdminCard
+  href="/admin/narozeniny"
+  icon="🎂"
+  title="Narozeniny"
+  text="Přehled narozenin všech členů SDH a JPO včetně nejbližších oslav."
+/>
         </div>
       </div>
     </main>
