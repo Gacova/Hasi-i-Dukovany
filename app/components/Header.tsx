@@ -28,8 +28,34 @@ export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Na hlavním rozcestníku se hlavička nezobrazuje
   if (pathname === "/") {
     return null;
+  }
+
+  // Jednoduchá hlavička v administraci
+  if (pathname.startsWith("/admin")) {
+    return (
+      <header className="border-b border-neutral-200 bg-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+          <Link
+            href="/"
+            className="text-2xl font-bold tracking-tight text-neutral-900"
+          >
+            <span className="text-red-700">Hasiči</span> Dukovany
+          </Link>
+
+          {pathname !== "/admin" && (
+            <Link
+              href="/admin"
+              className="font-semibold text-red-700 transition hover:text-red-900"
+            >
+              ← Zpět do administrace
+            </Link>
+          )}
+        </div>
+      </header>
+    );
   }
 
   const menu = pathname.startsWith("/jpo") ? jpoMenu : sdhMenu;
@@ -63,6 +89,7 @@ export default function Header() {
 
         {/* Mobil */}
         <button
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-2xl shadow-sm transition hover:bg-neutral-100 md:hidden"
           aria-label="Otevřít menu"
