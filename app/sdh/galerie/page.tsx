@@ -45,6 +45,7 @@ export default function GaleriePage() {
             gap: "28px",
           }}
         >
+          {/* PÁLENÍ ČARODĚJNIC */}
           <GalleryCard
             href="/sdh/galerie/carodejnice-2026"
             image="/akce/carodejnice-2026/IMG_0694.JPG"
@@ -53,12 +54,22 @@ export default function GaleriePage() {
             text="Fotogalerie z tradiční akce SDH Dukovany."
           />
 
+          {/* POUŤ */}
           <GalleryCard
             href="/sdh/galerie/pout-2026"
             image="/pout/IMG-20260531-WA0006.jpg"
             alt="Pouť 2026"
             title="Pouť 2026"
             text="Fotogalerie z tradiční pouti a pouťového průvodu v Dukovanech."
+          />
+
+          {/* TÁBOR 2026 */}
+          <GalleryCard
+          href="/sdh/galerie/tabor-2026"
+            image="/tabor2026/p3hlavni.jpg"
+            alt="Příměstský hasičský tábor 2026"
+            title="Příměstský hasičský tábor 2026"
+            text="Fotogalerie z pěti dnů plných výletů, soutěží, her a společných zážitků."
           />
         </div>
       </div>
@@ -80,7 +91,13 @@ function GalleryCard({
   text: string;
 }) {
   return (
-    <a href={href} style={{ textDecoration: "none", color: "inherit" }}>
+    <a
+      href={href}
+      style={{
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
       <article
         style={{
           background: "#ffffff",
