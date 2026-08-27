@@ -10,6 +10,45 @@ export default function Tabor2026Page() {
         color: "#111827",
       }}
     >
+      <style>{`
+        .day-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 40px;
+          align-items: center;
+        }
+
+        .day-content {
+          order: 1;
+        }
+
+        .day-image {
+          order: 2;
+        }
+
+        .day-content.reverse {
+          order: 2;
+        }
+
+        .day-image.reverse {
+          order: 1;
+        }
+
+        @media (max-width: 760px) {
+          .day-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+
+          .day-content,
+          .day-image,
+          .day-content.reverse,
+          .day-image.reverse {
+            order: initial;
+          }
+        }
+      `}</style>
+
       <div
         style={{
           maxWidth: "1250px",
@@ -49,6 +88,7 @@ export default function Tabor2026Page() {
           vlastních hranic, nechyběla ani noc mimo domov a stezka odvahy.
         </p>
 
+        {/* PONDĚLÍ */}
         <DaySection
           number="01"
           day="PONDĚLÍ"
@@ -78,6 +118,7 @@ export default function Tabor2026Page() {
           </p>
         </DaySection>
 
+        {/* ÚTERÝ */}
         <DaySection
           number="02"
           day="ÚTERÝ"
@@ -112,6 +153,7 @@ export default function Tabor2026Page() {
           </p>
         </DaySection>
 
+        {/* STŘEDA */}
         <DaySection
           number="03"
           day="STŘEDA"
@@ -129,6 +171,7 @@ export default function Tabor2026Page() {
           </p>
         </DaySection>
 
+        {/* ČTVRTEK */}
         <DaySection
           number="04"
           day="ČTVRTEK"
@@ -170,6 +213,7 @@ export default function Tabor2026Page() {
           </p>
         </DaySection>
 
+        {/* PÁTEK */}
         <DaySection
           number="05"
           day="PÁTEK"
@@ -192,6 +236,7 @@ export default function Tabor2026Page() {
           </p>
         </DaySection>
 
+        {/* ZÁVĚR */}
         <section
           style={{
             marginTop: "60px",
@@ -243,8 +288,9 @@ export default function Tabor2026Page() {
           </p>
         </section>
 
+        {/* FOTOGALERIE */}
         <Link
-      href="/sdh/galerie/tabor-2026"
+          href="/sdh/galerie/tabor-2026"
           style={{
             display: "block",
             marginTop: "34px",
@@ -345,15 +391,11 @@ function DaySection({
         marginBottom: "70px",
       }}
     >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "40px",
-          alignItems: "center",
-        }}
-      >
-        <div style={{ order: reverse ? 2 : 1 }}>
+      <div className="day-grid">
+        {/* DŮLEŽITÉ:
+            Obsah je v HTML vždy první.
+            Na mobilu tedy bude vždy NAD fotkou. */}
+        <div className={`day-content ${reverse ? "reverse" : ""}`}>
           <div
             style={{
               display: "flex",
@@ -399,7 +441,7 @@ function DaySection({
           {children}
         </div>
 
-        <div style={{ order: reverse ? 1 : 2 }}>
+        <div className={`day-image ${reverse ? "reverse" : ""}`}>
           <img
             src={image}
             alt={`${day} – ${title}`}
